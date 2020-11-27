@@ -47,9 +47,15 @@ header {
   padding: 0 3rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-.burger_wrapper {
+.left_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.burger_menu {
   cursor: pointer;
   width: 2.6rem;
   height: 1.4rem;
@@ -87,17 +93,47 @@ header {
   }
 }
 
+.playmode {
+  @include no-sellect ();
+  position: relative;
+  padding: 0 1rem;
+  width: 8rem;
+  border-radius: 3rem;
+  height: 2.8rem;
+  line-height: 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  &.train {
+    text-align: right;
+    background: #ecd3ff;
+  }
+  &.play {
+    text-align-last: left;
+    background: #8BFFAB;
+  }
+  .elipse {
+    position: absolute;
+    left: 0.3rem;
+    top: 0.3rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 100%;
+    background-color: #8bffab;
+  }
+}
+
 footer {
   bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  & .copyright {
+  .copyright {
     text-align: right;
     margin-right: 1.5rem;
     font-size: 1rem;
   }
-  & .logo_href {
+  .logo_href {
     margin: 0 0.5rem;
   }
 }
@@ -133,10 +169,7 @@ main {
   filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.05));
   background-color: #fff;
   &__image {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
+    @include no-sellect ();
     user-select: none;
     width: auto;
     height: auto;
