@@ -5,25 +5,147 @@
 
 :root {
   font-size: 10px;
-  font-family: 'Roboto-regular', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
 }
 
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  transition: all 0.25s ease;
 }
 
 body {
   background: black;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-  color: coral;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+  color: #000;
 }
 
 p {
   color: #fff;
-  font-size: 12rem;
+  font-size: 1.6rem;
   font-weight: normal;
+}
+
+header,
+footer {
+  background: #fff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  height: 6.5rem;
+  width: 100%;
+  position: fixed;
+}
+
+header {
+  top: 0;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.burger_wrapper {
+  cursor: pointer;
+  width: 2.6rem;
+  height: 1.4rem;
+  position: relative;
+  .burger {
+    width: 2.6rem;
+    height: 0.2rem;
+    background-color: #000;
+    position: absolute;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      width: 2.6rem;
+      height: 0.2rem;
+      background-color: #000;
+    }
+    &:before {
+      bottom: -0.6rem;
+    }
+    &:after {
+      bottom: -1.2rem;
+    }
+  }
+  &:hover {
+    transform: rotateZ(-90deg);
+    .burger {
+      &:before {
+        bottom: -0.9rem;
+      }
+      &:after {
+        bottom: -1.8rem;
+      }
+    }
+  }
+}
+
+footer {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .copyright {
+    text-align: right;
+    margin-right: 1.5rem;
+    font-size: 1rem;
+  }
+  & .logo_href {
+    margin: 0 0.5rem;
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(50% 50% at 50% 50%, #b8ffe5 0%, #8bffac 100%),
+    #c4c4c4;
+}
+
+.cards-wrapper {
+  width: 102rem;
+  height: 62rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+}
+
+.categoryCard {
+  height: 30rem;
+  width: 24rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.05));
+  background-color: #fff;
+  &__image {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    width: auto;
+    height: auto;
+  }
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  text-align: center;
 }
