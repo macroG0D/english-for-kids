@@ -21,6 +21,11 @@ body {
   padding: 0;
 }
 
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
 h1 {
   font-size: 1.4rem;
   margin-left: 1rem;
@@ -40,6 +45,7 @@ footer {
   height: 6.5rem;
   width: 100%;
   position: fixed;
+  z-index: 999;
 }
 
 header {
@@ -55,12 +61,28 @@ header {
   align-items: center;
 }
 
+.bluredBackgound {
+  position: fixed;
+  z-index: 997;
+  width: 100vw;
+  height: 100vw;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 184, 188, 0.3) 0%,
+    rgba(190, 139, 255, 0.3) 100%
+  );
+  backdrop-filter: blur(10px);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
 .burger_menu {
   cursor: pointer;
   width: 2.6rem;
   height: 1.4rem;
   position: relative;
+  transition: all 0.25s ease-in-out;
   .burger {
+    transition: all 0.25s ease-in-out;
     width: 2.6rem;
     height: 0.2rem;
     background-color: #000;
@@ -80,8 +102,7 @@ header {
       bottom: -1.2rem;
     }
   }
-  &:hover {
-    transform: rotateZ(-90deg);
+  &__active {
     .burger {
       &:before {
         bottom: -0.9rem;
@@ -93,8 +114,48 @@ header {
   }
 }
 
+.sideMenu {
+  position: fixed;
+  padding: 0 3rem;
+  width: 32rem;
+  height: 100vh;
+  z-index: 998;
+  background: linear-gradient(0deg, #d57ff3 7.51%, #be8bff 50.06%), #9064b3;
+  &__hidden {
+    left: -32rem;
+  }
+  &__list {
+    padding: 0;
+    margin-top: 12.5rem;
+    list-style-type: none;
+    color: #fff;
+    a {
+      &:hover {
+        color: #B7FFE4;
+      }
+    }
+  }
+  &__listItemHeader {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    letter-spacing: 0.04rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 3rem 0;
+    &:nth-child(2) {
+      margin-bottom: 0;
+    }
+  }
+  &__listItem {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    margin: 1.5rem 0;
+  }
+}
+
 .playmode {
-  @include no-sellect ();
+  @include no-sellect();
   position: relative;
   padding: 0 1rem;
   width: 8rem;
@@ -104,17 +165,23 @@ header {
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
+  cursor: pointer;
   &.train {
     text-align: right;
     background: #ecd3ff;
+    &:hover {
+      background: #e6c6ff;
+    }
   }
   &.play {
-    text-align-last: left;
-    background: #8BFFAB;
+    text-align: left;
+    background: #8bffab;
+    &:hover {
+      background: #85f5a5;
+    }
   }
   .elipse {
     position: absolute;
-    left: 0.3rem;
     top: 0.3rem;
     width: 2.2rem;
     height: 2.2rem;
@@ -144,7 +211,14 @@ main {
   align-items: center;
   width: 100%;
   min-height: 100vh;
+}
+
+.mainTrain {
   background: radial-gradient(50% 50% at 50% 50%, #b8ffe5 0%, #8bffac 100%),
+    #c4c4c4;
+}
+.mainPlay {
+  background: radial-gradient(50% 50% at 50% 50%, #ffb8bc 0%, #be8bff 100%),
     #c4c4c4;
 }
 
@@ -166,13 +240,18 @@ main {
   flex-direction: column;
   overflow: hidden;
   border-radius: 20px;
+  cursor: pointer;
   filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.05));
   background-color: #fff;
   &__image {
-    @include no-sellect ();
+    @include no-sellect();
     user-select: none;
     width: auto;
     height: auto;
+  }
+  &:hover {
+    z-index: 30;
+    filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.15));
   }
 }
 
