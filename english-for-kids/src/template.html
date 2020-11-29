@@ -7,17 +7,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.png" type="image/png">
-  <title>Webpack start</title>
+  <title>English for Kids</title>
 </head>
 
 <body>
-  
-  <header>
+
+  <header class="header">
     <div class="left_wrapper">
       <div class="burger_menu">
         <div class="burger"></div>
       </div>
-      <h1>English for Kids</h1>
+      <h1 class="logo">English for Kids</h1>
     </div>
     <div class="playmode train">
       <div class="elipse" style="left: 0.3rem;"></div>
@@ -27,61 +27,31 @@
 
   <nav class="sideMenu sideMenu__hidden">
     <ul class="sideMenu__list">
-      <li class="sideMenu__listItemHeader"><a href="#">Main page</a></li>
+      <li class="sideMenu__listItemHeader mainMenu activeMenuItem"><span class="interactiveMenuItem">Main page</span></li>
       <li class="sideMenu__listItemHeader">Сategories</li>
-      <li class="sideMenu__listItem"><a href="#">Actions I</a></li>
-      <li class="sideMenu__listItem"><a href="#">Actions II</a></li>
-      <li class="sideMenu__listItem"><a href="#">Actions III</a></li>
-      <li class="sideMenu__listItem"><a href="#">Animals I</a></li>
-      <li class="sideMenu__listItem"><a href="#">Animals III</a></li>
-      <li class="sideMenu__listItem"><a href="#">Clothes</a> </li>
-      <li class="sideMenu__listItem"><a href="#">Emotions</a> </li>
-      <li class="sideMenu__listItem"><a href="#">Technology</a> </li>
-      <li class="sideMenu__listItemHeader"><a href="#">Statistic</a> </li>
+      <li class="sideMenu__listItem" name="Actions I"><span class="interactiveMenuItem">Actions I</span></li>
+      <li class="sideMenu__listItem" name="Actions II"><span class="interactiveMenuItem">Actions II</span></li>
+      <li class="sideMenu__listItem" name="Actions III"><span class="interactiveMenuItem">Actions III</span></li>
+      <li class="sideMenu__listItem" name="Animals I"><span class="interactiveMenuItem">Animals I</span></li>
+      <li class="sideMenu__listItem" name="Animals II"><span class="interactiveMenuItem">Animals II</span></li>
+      <li class="sideMenu__listItem" name="Clothes"><span class="interactiveMenuItem">Clothes</span></li>
+      <li class="sideMenu__listItem" name="Emotions" ><span class="interactiveMenuItem">Emotions</span></li>
+      <li class="sideMenu__listItem" name="Technology"><span class="interactiveMenuItem">Technology</span></li>
+      <li class="sideMenu__listItemHeader statistic"><span class="interactiveMenuItem">Statistic</span></li>
     </ul>
   </nav>
 
   <main class="mainTrain">
     <div class="cards-wrapper">
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/actions_1.png" alt="Actions 1">
-        <h2>Actions I</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/actions_2.png" alt="Actions 2">
-        <h2>Actions II</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/actions_3.png" alt="Actions 3">
-        <h2>Actions III</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/animals_1.png" alt="Animals 1">
-        <h2>Animals I</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/animals_2.png" alt="Animals 2">
-        <h2>Animals II</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/clothes.png" alt="Clothes">
-        <h2>Clothes</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/emotions.png" alt="Emotions">
-        <h2>Emotions</h2>
-      </div>
-      <div class="categoryCard">
-        <img class="categoryCard__image" src="./assets/images/technology.png" alt="Technology">
-        <h2>Technology</h2>
-      </div>
     </div>
   </main>
 
   <footer>
     <span class="copyright">English for Kids © 2020</span>
-    <a class="logo_href" href="https://github.com/macroG0D" target="_blank"><img src="./assets/icons/tony_logo.png" alt="Tony Yemelyanov"></a>
-    <a class="logo_href" href="https://rs.school/js/" target="_blank"><img src="./assets/icons/rs_school_js 1.svg" alt="Rolling Scopes School"></a>
+    <a class="logo_href" href="https://github.com/macroG0D" target="_blank"><img src="./assets/icons/tony_logo.png"
+        alt="Tony Yemelyanov"></a>
+    <a class="logo_href" href="https://rs.school/js/" target="_blank"><img src="./assets/icons/rs_school_js 1.svg"
+        alt="Rolling Scopes School"></a>
   </footer>
 </body>
 

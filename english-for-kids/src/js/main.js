@@ -1,55 +1,104 @@
 import '../styles/main.scss';
-// import image from '../assets/images/tonyem.jpg';
-// import Model from './models/Model';
+import Menu from './models/Menu';
+import GameMode from './models/GameMode';
+import Home from './models/Home';
+import Category from './models/Category';
 
-// const model = new Model('English-for-kids');
+const menu = new Menu('trainmode');
 
 // burger and side menu
-const sideMenu = document.querySelector('.sideMenu');
 const burger = document.querySelector('.burger_menu');
 const main = document.querySelector('main');
+const header = document.querySelector('header');
+const footer = document.querySelector('footer');
 
 const bluredBackgound = document.createElement('div');
 bluredBackgound.classList.add('bluredBackgound');
 
-const hideMenu = function () {
-  burger.style.transform = 'rotateZ(0deg)';
-  burger.classList.remove('burger_menu__active');
-  sideMenu.style.left = '-32rem';
-  bluredBackgound.remove();
-};
-
-const showMenu = function () {
-  burger.style.transform = 'rotateZ(-90deg)';
-  burger.classList.add('burger_menu__active');
-  sideMenu.style.left = '0';
-  main.append(bluredBackgound);
-  main.addEventListener('mouseenter', hideMenu);
-};
-
-burger.addEventListener('mouseenter', showMenu);
-
-// train/play mode
-const modeBtn = document.querySelector('.playmode');
-const playmodeText = document.querySelector('.playmode__text');
-const elipse = document.querySelector('.elipse');
-
-const toggleAppMode = function () {
-  main.classList.toggle('mainTrain');
-  main.classList.toggle('mainPlay');
-  if (modeBtn.classList.contains('train')) {
-    elipse.style.right = '0.3rem';
-    elipse.style.removeProperty('left');
-    playmodeText.textContent = 'Play';
-    elipse.style.backgroundColor = '#C57AFF';
+const menuController = function (e) {
+  if (e.target.classList.contains('burger_menu') || e.target.classList.contains('burger')) {
+    if (!menu.opened) {
+      menu.showMenu(bluredBackgound);
+    } else {
+      menu.hideMenu(bluredBackgound);
+    }
   } else {
-    elipse.style.removeProperty('right');
-    elipse.style.left = '0.3rem';
-    elipse.style.backgroundColor = '#8bffab';
-    playmodeText.textContent = 'Train';
+    menu.hideMenu(bluredBackgound);
   }
-  modeBtn.classList.toggle('train');
-  modeBtn.classList.toggle('play');
 };
 
-modeBtn.addEventListener('click', toggleAppMode);
+const outsideMenu = [burger, main, footer];
+outsideMenu.forEach((elem) => {
+  elem.addEventListener('click', menuController);
+});
+
+header.addEventListener('click', (e) => {
+  if (menu.opened && !e.composedPath()[2].classList.contains('header') && !e.composedPath()[2].classList.contains('left_wrapper')) {
+    menu.hideMenu(bluredBackgound);
+  }
+});
+
+let category;
+const categoryLinks = document.querySelectorAll('.sideMenu__listItem');
+let categoryCards = document.querySelectorAll('.categoryCard');
+const gameMode = new GameMode(main);
+const modeBtn = document.querySelector('.playmode');
+
+const home = new Home();
+// home.createHomeCards();
+const cardsWrapper = document.querySelector('.cards-wrapper');
+
+function clearCardsWrapper() {
+  cardsWrapper.innerHTML = ''; // remove all from
+}
+
+function loadCategoryPage(selected) {
+  const selectedCategory = selected.getAttribute('name');
+  clearCardsWrapper();
+  if (category) {
+    category = null; // set class instance to null
+  }
+  category = new Category(selectedCategory, gameMode.mode);
+  menu.hideMenu(bluredBackgound);
+}
+
+// menu main
+function goHome() {
+  clearCardsWrapper();
+  home.createHomeCards();
+  categoryCards = document.querySelectorAll('.categoryCard');
+  menu.hideMenu(bluredBackgound);
+
+  categoryCards.forEach((categoryCard) => {
+    categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard));
+  });
+
+  categoryLinks.forEach((categoryLink) => {
+    categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink));
+  });
+}
+
+const switchMode = function () {
+  goHome();
+  gameMode.toggleAppMode();
+  // const titleWrappers = document.querySelectorAll('.title-wrapper');
+  // if (titleWrappers) {
+  //   titleWrappers.forEach((titleWrapper) => {
+  //     titleWrapper.classList.toggle('hidden');
+  //   });
+  // }
+};
+
+modeBtn.addEventListener('click', switchMode);
+
+const mainLink = document.querySelector('.mainMenu');
+mainLink.addEventListener('click', goHome);
+
+goHome(); // create home cards on startup
+
+// reload app on logo click
+function homepage() {
+  window.location.reload();
+}
+const logo = document.querySelector('.logo');
+logo.addEventListener('click', homepage);
