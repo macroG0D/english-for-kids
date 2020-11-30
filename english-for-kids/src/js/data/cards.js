@@ -37,7 +37,7 @@ const cards = [
     {
       word: 'fish',
       translation: 'ловить рыбу',
-      image: 'images/fish.jpg',
+      image: 'images/fishing.jpg',
       audioSrc: 'audio/fish.mp3',
     },
     {
@@ -111,6 +111,56 @@ const cards = [
   ],
   [
     {
+      word: 'laugh',
+      translation: 'смеяться',
+      image: 'images/laugh.jpg',
+      audioSrc: 'audio/laugh.mp3',
+    },
+    {
+      word: 'read',
+      translation: 'читать',
+      image: 'images/read.jpg',
+      audioSrc: 'audio/read.mp3',
+    },
+    {
+      word: 'fight',
+      translation: 'драться',
+      image: 'images/fight.jpg',
+      audioSrc: 'audio/fight.mp3',
+    },
+    {
+      word: 'wash',
+      translation: 'мыть',
+      image: 'images/wash.jpg',
+      audioSrc: 'audio/wash.mp3',
+    },
+    {
+      word: 'cook',
+      translation: 'готовить',
+      image: 'images/cook.jpg',
+      audioSrc: 'audio/cook.mp3',
+    },
+    {
+      word: 'sleep',
+      translation: 'спать',
+      image: 'images/sleep.jpg',
+      audioSrc: 'audio/sleep.mp3',
+    },
+    {
+      word: 'hide',
+      translation: 'прятаться',
+      image: 'images/hide.jpg',
+      audioSrc: 'audio/hide.mp3',
+    },
+    {
+      word: 'play',
+      translation: 'играть на инструменте',
+      image: 'images/play_music.jpg',
+      audioSrc: 'audio/play.mp3',
+    },
+  ],
+  [
+    {
       word: 'cat',
       translation: 'кот',
       image: 'images/cat.jpg',
@@ -169,7 +219,7 @@ const cards = [
     {
       word: 'fish',
       translation: 'рыба',
-      image: 'images/fish1.jpg',
+      image: 'images/fish.jpg',
       audioSrc: 'audio/fish.mp3',
     },
     {
@@ -180,7 +230,7 @@ const cards = [
     },
     {
       word: 'giraffe',
-      translation: 'жирафа',
+      translation: 'жираф',
       image: 'images/giraffe.jpg',
       audioSrc: 'audio/giraffe.mp3',
     },
@@ -218,7 +268,7 @@ const cards = [
     },
     {
       word: 'pants',
-      translation: 'брюки',
+      translation: 'штаны',
       image: 'images/pants.jpg',
       audioSrc: 'audio/pants.mp3',
     },
@@ -307,6 +357,56 @@ const cards = [
       translation: 'смех',
       image: 'images/laugh.jpg',
       audioSrc: 'audio/laugh.mp3',
+    },
+  ],
+  [
+    {
+      word: 'computer',
+      translation: 'компьютер',
+      image: 'images/computer.jpg',
+      audioSrc: 'audio/computer.mp3',
+    },
+    {
+      word: 'car',
+      translation: 'машина',
+      image: 'images/car.jpg',
+      audioSrc: 'audio/car.mp3',
+    },
+    {
+      word: 'headphones',
+      translation: 'наушники',
+      image: 'images/headphones.jpg',
+      audioSrc: 'audio/headphones.mp3',
+    },
+    {
+      word: 'spaceship',
+      translation: 'космический корабль',
+      image: 'images/spaceship.jpg',
+      audioSrc: 'audio/spaceship.mp3',
+    },
+    {
+      word: 'robot',
+      translation: 'робот',
+      image: 'images/robot.jpg',
+      audioSrc: 'audio/robot.mp3',
+    },
+    {
+      word: 'camera',
+      translation: 'камера',
+      image: 'images/camera.jpg',
+      audioSrc: 'audio/camera.mp3',
+    },
+    {
+      word: 'code',
+      translation: 'код',
+      image: 'images/code.jpg',
+      audioSrc: 'audio/code.mp3',
+    },
+    {
+      word: 'keyboard',
+      translation: 'клавиатура',
+      image: 'images/keyboard.jpg',
+      audioSrc: 'audio/keyboard.mp3',
     },
   ],
 ];

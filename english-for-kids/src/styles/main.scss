@@ -12,7 +12,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  transition: all 0.25s ease;
+  transition: all 0.25s ease-out;
 }
 
 body {
@@ -149,19 +149,18 @@ header {
     font-weight: 500;
     line-height: 1.8rem;
     margin: 1.5rem 0;
-    
   }
 }
 
 .interactiveMenuItem {
   &:hover {
-    color: #B7FFE4;
+    color: #b7ffe4;
     cursor: pointer;
   }
 }
 
 .activeMenuItem {
-  color: #B7FFE4;
+  color: #b7ffe4;
 }
 
 .playmode {
@@ -241,8 +240,7 @@ main {
   flex-wrap: wrap;
 }
 
-
-.categoryCard, .wordCard {
+.categoryCard, .wordCardWrapper  {
   height: 30rem;
   width: 24rem;
   display: flex;
@@ -250,7 +248,7 @@ main {
   align-items: center;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 2rem;
   cursor: pointer;
   filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.05));
   background-color: #fff;
@@ -259,11 +257,70 @@ main {
     user-select: none;
     width: auto;
     height: auto;
-    // max-height: 20rem;
   }
   &:hover {
+    img {
+      transform: scale(1.05, 1.05);
+    }
     z-index: 30;
     filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.15));
+  }
+}
+
+.wordCardWrapper {
+  position: relative;
+  text-align: center;
+  transform-style: preserve-3d;
+  background-color: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 30rem;
+  width: 24rem;
+}
+
+.wordCard {
+  transition: all 0.35s ease-out;
+  perspective: 100rem;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.back {
+  color: #fff;
+  font-weight: 700;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 184, 188, 0.3) 0%, rgba(190, 139, 255, 1) 100%);
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.flipButton {
+  cursor: pointer;
+  position: absolute;
+  top: 0.7rem;
+  right: 0.5rem;
+  &:hover {
+    opacity: .5;
+    transform: rotateZ(180deg);
   }
 }
 

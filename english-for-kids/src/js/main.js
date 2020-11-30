@@ -39,20 +39,51 @@ header.addEventListener('click', (e) => {
 });
 
 let category;
-const categoryLinks = document.querySelectorAll('.sideMenu__listItem');
+const categoryLinks = document.querySelectorAll('.categoryLink');
 let categoryCards = document.querySelectorAll('.categoryCard');
 const gameMode = new GameMode(main);
 const modeBtn = document.querySelector('.playmode');
-
+const mainLink = document.querySelector('.mainMenu');
 const home = new Home();
-// home.createHomeCards();
 const cardsWrapper = document.querySelector('.cards-wrapper');
 
 function clearCardsWrapper() {
   cardsWrapper.innerHTML = ''; // remove all from
 }
 
+function setActiveMenuItem(newAvtiveMenuItem) {
+  const prevActiveMenuItem = document.querySelector('.activeMenuItem');
+  if (prevActiveMenuItem) {
+    prevActiveMenuItem.classList.remove('activeMenuItem');
+  }
+  if (newAvtiveMenuItem.classList.contains('interactiveMenuItem')) {
+    newAvtiveMenuItem.classList.add('activeMenuItem');
+  } else {
+    const newActive = document.querySelector(`[name="${newAvtiveMenuItem.getAttribute('name')}"]`);
+    newActive.classList.add('activeMenuItem');
+  }
+}
+
+const flipBack = function () {
+  const cardToFlip = this.children[0];
+  const titleWrapper = cardToFlip.children[0].children[1];
+  cardToFlip.children[0].children[0].removeAttribute('style');
+  cardToFlip.removeAttribute('style');
+  titleWrapper.removeAttribute('style');
+};
+const flip = function () {
+  const cardWrapper = this.closest('.wordCardWrapper');
+  const cardToFlip = this.closest('.wordCard');
+  cardToFlip.style.transform = 'rotateY(180deg)';
+  const titleWrapper = cardToFlip.children[0].children[1];
+  titleWrapper.style.transform = 'translateY(10rem)';
+  cardWrapper.addEventListener('mouseleave', flipBack);
+  cardWrapper.children[0].children[0].children[0].style.transform = 'scale(1, 1)';
+  // transform: scale(1, 1);
+};
+
 function loadCategoryPage(selected) {
+  setActiveMenuItem(selected);
   const selectedCategory = selected.getAttribute('name');
   clearCardsWrapper();
   if (category) {
@@ -60,6 +91,12 @@ function loadCategoryPage(selected) {
   }
   category = new Category(selectedCategory, gameMode.mode);
   menu.hideMenu(bluredBackgound);
+  const flipButtons = document.querySelectorAll('.flipButton');
+  if (flipButtons) {
+    flipButtons.forEach((flipButton) => {
+      flipButton.addEventListener('click', flip);
+    });
+  }
 }
 
 // menu main
@@ -68,6 +105,7 @@ function goHome() {
   home.createHomeCards();
   categoryCards = document.querySelectorAll('.categoryCard');
   menu.hideMenu(bluredBackgound);
+  setActiveMenuItem(mainLink);
 
   categoryCards.forEach((categoryCard) => {
     categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard));
@@ -81,17 +119,10 @@ function goHome() {
 const switchMode = function () {
   goHome();
   gameMode.toggleAppMode();
-  // const titleWrappers = document.querySelectorAll('.title-wrapper');
-  // if (titleWrappers) {
-  //   titleWrappers.forEach((titleWrapper) => {
-  //     titleWrapper.classList.toggle('hidden');
-  //   });
-  // }
 };
 
 modeBtn.addEventListener('click', switchMode);
 
-const mainLink = document.querySelector('.mainMenu');
 mainLink.addEventListener('click', goHome);
 
 goHome(); // create home cards on startup
