@@ -301,10 +301,12 @@ main {
   font-weight: 700;
   transform: rotateY(180deg);
   display: flex;
+  text-shadow: 0rem 0rem 2rem rgb(90, 67, 112);
   justify-content: center;
   text-align: center;
   align-items: center;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 184, 188, 0.3) 0%, rgba(190, 139, 255, 1) 100%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 184, 188, 0.698) 0%, rgba(190, 139, 255, 1) 100%);
+  pointer-events: none;
 }
 
 button {

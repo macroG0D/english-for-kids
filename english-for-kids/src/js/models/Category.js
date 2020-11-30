@@ -5,6 +5,7 @@ export default class Category {
     this.category = category;
     this.gameMode = gameMode;
     this.init();
+    this.fliped = false;
   }
 
   init() {
@@ -34,6 +35,7 @@ export default class Category {
       wordCard.appendChild(front);
       wordCard.appendChild(back);
       if (this.gameMode !== 'play') {
+        wordCardImage.setAttribute('sound', card.audioSrc);
         const wordCardTitleWrapper = document.createElement('div');
         wordCardTitleWrapper.classList.add('title-wrapper');
         const wordCardTitle = document.createElement('h2');

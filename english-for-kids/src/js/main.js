@@ -65,13 +65,16 @@ function setActiveMenuItem(newAvtiveMenuItem) {
 }
 
 const flipBack = function () {
+  category.fliped = false;
   const cardToFlip = this.children[0];
   const titleWrapper = cardToFlip.children[0].children[1];
   cardToFlip.children[0].children[0].removeAttribute('style');
   cardToFlip.removeAttribute('style');
   titleWrapper.removeAttribute('style');
 };
+
 const flip = function () {
+  category.fliped = true;
   const cardWrapper = this.closest('.wordCardWrapper');
   const cardToFlip = this.closest('.wordCard');
   cardToFlip.style.transform = 'rotateY(180deg)';
@@ -79,7 +82,15 @@ const flip = function () {
   titleWrapper.style.transform = 'translateY(10rem)';
   cardWrapper.addEventListener('mouseleave', flipBack);
   cardWrapper.children[0].children[0].children[0].style.transform = 'scale(1, 1)';
-  // transform: scale(1, 1);
+};
+
+const pronunciation = function () {
+  const pronouncedWord = this.getAttribute('sound');
+  const audio = new Audio();
+  audio.src = `./assets/${pronouncedWord}`;
+  if (!category.fliped) {
+    audio.play();
+  }
 };
 
 function loadCategoryPage(selected) {
@@ -95,6 +106,13 @@ function loadCategoryPage(selected) {
   if (flipButtons) {
     flipButtons.forEach((flipButton) => {
       flipButton.addEventListener('click', flip);
+    });
+  }
+
+  const frontSideOfCards = document.querySelectorAll('.categoryCard__image');
+  if (category.gameMode !== 'play') {
+    frontSideOfCards.forEach((cardFront) => {
+      cardFront.addEventListener('click', pronunciation);
     });
   }
 }
