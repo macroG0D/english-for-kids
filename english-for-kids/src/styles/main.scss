@@ -349,3 +349,18 @@ h2 {
 .hidden {
   display: none;
 }
+
+.startGameButton {
+  position: fixed;
+  bottom: 10rem;
+  z-index: 9999;
+  background: radial-gradient(50% 50% at 50% 50%, #b8ffe5 0%, #8bffac 100%),
+  #c4c4c4;
+  cursor: pointer;
+  width: 30rem;
+  height: 6rem;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #be8bff;
+}

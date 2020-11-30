@@ -3,6 +3,7 @@ import Menu from './models/Menu';
 import GameMode from './models/GameMode';
 import Home from './models/Home';
 import Category from './models/Category';
+import Game from './models/Game';
 
 const menu = new Menu('trainmode');
 
@@ -93,6 +94,13 @@ const pronunciation = function () {
   }
 };
 
+const startNewGame = function () {
+  // console.log(category.category);
+  const game = new Game(category.category);
+  // console.log(game);
+  game.startGame();
+};
+
 function loadCategoryPage(selected) {
   setActiveMenuItem(selected);
   const selectedCategory = selected.getAttribute('name');
@@ -114,6 +122,9 @@ function loadCategoryPage(selected) {
     frontSideOfCards.forEach((cardFront) => {
       cardFront.addEventListener('click', pronunciation);
     });
+  } else {
+    const startGameButton = document.querySelector('.startGameButton');
+    startGameButton.addEventListener('click', startNewGame);
   }
 }
 

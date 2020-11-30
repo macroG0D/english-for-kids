@@ -52,5 +52,12 @@ export default class Category {
       wordCardWrapper.appendChild(wordCard);
       cardsWrapper.appendChild(wordCardWrapper);
     });
+    if (this.gameMode === 'play') {
+      const startGameButton = document.createElement('button');
+      startGameButton.classList.add('startGameButton');
+      startGameButton.textContent = 'Start Game';
+      const main = document.querySelector('main');
+      main.appendChild(startGameButton);
+    }
   }
 }
