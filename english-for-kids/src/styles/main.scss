@@ -350,17 +350,54 @@ h2 {
   display: none;
 }
 
-.startGameButton {
+.startGameButton, .repeat {
   position: fixed;
   bottom: 10rem;
   z-index: 9999;
+  cursor: pointer;
+  height: 6rem;
+}
+
+.startGameButton {
   background: radial-gradient(50% 50% at 50% 50%, #b8ffe5 0%, #8bffac 100%),
   #c4c4c4;
-  cursor: pointer;
   width: 30rem;
-  height: 6rem;
   border-radius: 5rem;
   font-size: 1.8rem;
   font-weight: 500;
   color: #be8bff;
+}
+
+.repeat {
+  bottom: 12rem;
+  color: #000;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.playable {
+  &:after {
+    content: "Play";
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 3rem;
+    background-color: #8bffab;
+    font-size: 1.2rem;
+    border-radius: 1rem 1rem 0 0;
+    transition: all .25s ease;
+  }
+  &:hover {
+    &:after {
+      letter-spacing: .1rem;
+      background-color: #be8bff;
+      color: #fff;
+    }
+  }
 }

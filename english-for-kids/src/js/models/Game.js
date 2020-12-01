@@ -16,7 +16,7 @@ export default class Game {
       if (this.randomSequence.indexOf(r) === -1) this.randomSequence.push(r);
     }
     // произнести слово
-    this.sayWord(this.wordsCounter);
+    this.sayNewWord(this.wordsCounter);
     // навесить слушатели на карточки
     // eslint-disable-next-line max-len
     // если значение в нажатой карточке === текущее слово в индексе, перейти к следующему слову массива
@@ -26,7 +26,14 @@ export default class Game {
     // когда будут угаданы все слова, завершить игру с соответствующим сообщением и звуком
   }
 
-  sayWord(index) {
+  repeat() {
+    const index = this.wordsCounter - 1;
+    const audio = new Audio();
+    audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
+    audio.play();
+  }
+
+  sayNewWord(index) {
     const audio = new Audio();
     console.log(this.randomSequence[index]);
     audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;

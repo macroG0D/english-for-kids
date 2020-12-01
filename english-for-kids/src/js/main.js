@@ -94,14 +94,34 @@ const pronunciation = function () {
   }
 };
 
+let startGameButton;
+let repeatSoundButton;
+
 const startNewGame = function () {
-  // console.log(category.category);
   const game = new Game(category.category);
-  // console.log(game);
   game.startGame();
+  startGameButton.classList.remove('startGameButton');
+  startGameButton.classList.add('repeat');
+  startGameButton.textContent = '';
+  startGameButton.removeEventListener('click', startNewGame);
+  repeatSoundButton = startGameButton;
+  repeatSoundButton.style.backgroundImage = 'url(./assets/icons/flip.svg)';
+  repeatSoundButton.addEventListener('click', game.repeat.bind(game));
 };
 
+function removeRepeatButton() {
+  const repeatButton = document.querySelector('.repeat');
+  if (repeatButton) {
+    repeatButton.remove();
+  }
+  // startGameButton = document.querySelector('.startGameButton');
+  if (startGameButton) {
+    startGameButton.remove();
+  }
+}
+
 function loadCategoryPage(selected) {
+  removeRepeatButton();
   setActiveMenuItem(selected);
   const selectedCategory = selected.getAttribute('name');
   clearCardsWrapper();
@@ -121,15 +141,20 @@ function loadCategoryPage(selected) {
   if (category.gameMode !== 'play') {
     frontSideOfCards.forEach((cardFront) => {
       cardFront.addEventListener('click', pronunciation);
+      // cardFront.addEventListener('dragstart', (e) => {
+      //   e.preventDefault();
+      // });
     });
   } else {
-    const startGameButton = document.querySelector('.startGameButton');
+    startGameButton = document.querySelector('.startGameButton');
     startGameButton.addEventListener('click', startNewGame);
   }
 }
+let currentMode;
 
 // menu main
 function goHome() {
+  removeRepeatButton();
   clearCardsWrapper();
   home.createHomeCards();
   categoryCards = document.querySelectorAll('.categoryCard');
@@ -139,6 +164,13 @@ function goHome() {
   categoryCards.forEach((categoryCard) => {
     categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard));
   });
+  // console.log(currentMode);
+  // console.log(gameMode.currentMode());
+  if (currentMode === 'play') {
+    categoryCards.forEach((categoryCard) => {
+      categoryCard.classList.add('playable');
+    });
+  }
 
   categoryLinks.forEach((categoryLink) => {
     categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink));
@@ -146,8 +178,9 @@ function goHome() {
 }
 
 const switchMode = function () {
-  goHome();
   gameMode.toggleAppMode();
+  currentMode = gameMode.currentMode();
+  goHome();
 };
 
 modeBtn.addEventListener('click', switchMode);

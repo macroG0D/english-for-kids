@@ -26,4 +26,8 @@ export default class GameMode {
     this.modeBtn.classList.toggle('train');
     this.modeBtn.classList.toggle('play');
   }
+
+  currentMode() {
+    return this.mode;
+  }
 }
