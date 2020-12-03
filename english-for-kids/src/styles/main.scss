@@ -240,7 +240,8 @@ main {
   flex-wrap: wrap;
 }
 
-.categoryCard, .wordCardWrapper  {
+.categoryCard,
+.wordCardWrapper {
   height: 30rem;
   width: 24rem;
   display: flex;
@@ -288,7 +289,14 @@ main {
   transform-style: preserve-3d;
 }
 
-.front, .back {
+.guessed {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: none;
+}
+
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -305,7 +313,11 @@ main {
   justify-content: center;
   text-align: center;
   align-items: center;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 184, 188, 0.698) 0%, rgba(190, 139, 255, 1) 100%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 184, 188, 0.698) 0%,
+    rgba(190, 139, 255, 1) 100%
+  );
   pointer-events: none;
 }
 
@@ -321,7 +333,7 @@ button {
   top: 0.7rem;
   right: 0.5rem;
   &:hover {
-    opacity: .5;
+    opacity: 0.5;
     transform: rotateZ(180deg);
   }
 }
@@ -350,7 +362,8 @@ h2 {
   display: none;
 }
 
-.startGameButton, .repeat {
+.startGameButton,
+.repeat {
   position: fixed;
   bottom: 10rem;
   z-index: 9999;
@@ -359,28 +372,53 @@ h2 {
 }
 
 .startGameButton {
-  background: radial-gradient(50% 50% at 50% 50%, #b8ffe5 0%, #8bffac 100%),
-  #c4c4c4;
   width: 30rem;
   border-radius: 5rem;
   font-size: 1.8rem;
-  font-weight: 500;
-  color: #be8bff;
+  font-weight: 700;
+  background: #8bffac;
+  color: rgba(0, 0, 0, 0.8);
+  transition: all 0.35s ease-out;
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  transition: all 0.35s ease-out;
+  &:hover {
+    background: #5dfa89;
+    color: #000;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .repeat {
-  bottom: 12rem;
+  bottom: 10rem;
   color: #000;
-  height: 3rem;
-  width: 3rem;
+  height: 6rem;
+  width: 6rem;
+  background: #f7f7f7;
   border-radius: 100%;
   background-repeat: no-repeat;
   background-position: center;
+  &:hover {
+    background: #5dfa89;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
 .playable {
   &:after {
-    content: "Play";
+    content: 'Play';
     position: absolute;
     bottom: 0;
     display: flex;
@@ -391,13 +429,104 @@ h2 {
     background-color: #8bffab;
     font-size: 1.2rem;
     border-radius: 1rem 1rem 0 0;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
   }
   &:hover {
     &:after {
-      letter-spacing: .1rem;
+      letter-spacing: 0.1rem;
       background-color: #be8bff;
       color: #fff;
+    }
+  }
+}
+
+.starsWrapper {
+  width: 100%;
+  left: 0;
+  top: 10rem;
+  height: 3rem;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.star {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  margin: 0 0.1rem;
+}
+
+.endGameMessageWrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .bluredBackgound {
+    cursor: auto;
+  }
+}
+
+.endGameMessage {
+  position: fixed;
+  width: 42.4rem;
+  // height: 50rem;
+  padding: 6rem;
+  max-width: 95%;
+  background-color: #fff;
+  z-index: 999;
+  border-radius: 2rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  & img {
+    justify-content: center;
+    align-items: center;
+    width: 21.3rem;
+    height: 21.3rem;
+    border-radius: 100%;
+  }
+  & h2 {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+  }
+
+  .starsWrapper {
+    align-items: center;
+    max-width: 28.3rem;
+    height: auto;
+    left: auto;
+    top: auto;
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .star {
+      height: 3.2rem;
+      width: 3.2rem;
+      margin: 0.1rem;
+    }
+  }
+  & button {
+    padding: 2rem 6.6rem;
+    font-size: 1.8rem;
+    border-radius: 5rem;
+    font-weight: 700;
+    background: #8bffac;
+    color: rgba(0, 0, 0, 0.8);
+    transition: all 0.35s ease-out;
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    transition: all 0.35s ease-out;
+    cursor: pointer;
+    &:hover {
+      background: #5dfa89;
+      color: #000;
     }
   }
 }

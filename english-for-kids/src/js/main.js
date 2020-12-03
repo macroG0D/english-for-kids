@@ -47,6 +47,7 @@ const modeBtn = document.querySelector('.playmode');
 const mainLink = document.querySelector('.mainMenu');
 const home = new Home();
 const cardsWrapper = document.querySelector('.cards-wrapper');
+let endGameWrapper;
 
 function clearCardsWrapper() {
   cardsWrapper.innerHTML = ''; // remove all from
@@ -107,6 +108,15 @@ const startNewGame = function () {
   repeatSoundButton = startGameButton;
   repeatSoundButton.style.backgroundImage = 'url(./assets/icons/flip.svg)';
   repeatSoundButton.addEventListener('click', game.repeat.bind(game));
+
+  const starsWrapper = document.createElement('div');
+  starsWrapper.classList.add('starsWrapper');
+  cardsWrapper.prepend(starsWrapper);
+
+  const cards = document.querySelectorAll('.wordCard');
+  cards.forEach((card) => {
+    card.addEventListener('click', game.chechIfCorrect.bind(game, card));
+  });
 };
 
 function removeRepeatButton() {
@@ -120,7 +130,15 @@ function removeRepeatButton() {
   }
 }
 
+function removeEndGameWrapper() {
+  endGameWrapper = document.querySelector('.endGameMessageWrapper');
+  if (endGameWrapper) {
+    endGameWrapper.remove();
+  }
+}
+
 function loadCategoryPage(selected) {
+  removeEndGameWrapper();
   removeRepeatButton();
   setActiveMenuItem(selected);
   const selectedCategory = selected.getAttribute('name');
@@ -141,9 +159,6 @@ function loadCategoryPage(selected) {
   if (category.gameMode !== 'play') {
     frontSideOfCards.forEach((cardFront) => {
       cardFront.addEventListener('click', pronunciation);
-      // cardFront.addEventListener('dragstart', (e) => {
-      //   e.preventDefault();
-      // });
     });
   } else {
     startGameButton = document.querySelector('.startGameButton');
@@ -164,8 +179,6 @@ function goHome() {
   categoryCards.forEach((categoryCard) => {
     categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard));
   });
-  // console.log(currentMode);
-  // console.log(gameMode.currentMode());
   if (currentMode === 'play') {
     categoryCards.forEach((categoryCard) => {
       categoryCard.classList.add('playable');
@@ -180,6 +193,7 @@ function goHome() {
 const switchMode = function () {
   gameMode.toggleAppMode();
   currentMode = gameMode.currentMode();
+  removeEndGameWrapper();
   goHome();
 };
 
@@ -195,3 +209,8 @@ function homepage() {
 }
 const logo = document.querySelector('.logo');
 logo.addEventListener('click', homepage);
+
+const statistic = document.querySelector('.statistic');
+statistic.addEventListener('click', () => {
+  console.log('statistic');
+});
