@@ -4,6 +4,7 @@ import GameMode from './models/GameMode';
 import Home from './models/Home';
 import Category from './models/Category';
 import Game from './models/Game';
+import Statistic from './models/Statistic';
 
 const menu = new Menu('trainmode');
 
@@ -91,7 +92,9 @@ const pronunciation = function () {
   const audio = new Audio();
   audio.src = `./assets/${pronouncedWord}`;
   if (!category.fliped) {
-    audio.play();
+    audio.addEventListener('canplaythrough', () => {
+      audio.play();
+    });
   }
 };
 
@@ -115,7 +118,7 @@ const startNewGame = function () {
 
   const cards = document.querySelectorAll('.wordCard');
   cards.forEach((card) => {
-    card.addEventListener('click', game.chechIfCorrect.bind(game, card));
+    card.addEventListener('click', game.checkIfCorrect.bind(game, card));
   });
 };
 
@@ -169,6 +172,7 @@ let currentMode;
 
 // menu main
 function goHome() {
+  removeEndGameWrapper();
   removeRepeatButton();
   clearCardsWrapper();
   home.createHomeCards();
@@ -188,6 +192,11 @@ function goHome() {
   categoryLinks.forEach((categoryLink) => {
     categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink));
   });
+
+  const playMoreButton = document.createElement('button');
+  playMoreButton.classList.add('playMoreButton');
+  main.appendChild(playMoreButton);
+  playMoreButton.addEventListener('click', goHome);
 }
 
 const switchMode = function () {

@@ -409,6 +409,7 @@ h2 {
   border-radius: 100%;
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: 0 0.1rem 2rem rgb(255, 255, 255);
   &:hover {
     background: #5dfa89;
     background-position: center;
@@ -443,11 +444,12 @@ h2 {
 .starsWrapper {
   width: 100%;
   left: 0;
-  top: 10rem;
+  top: 8rem;
   height: 3rem;
   position: absolute;
   display: flex;
   justify-content: center;
+  z-index: 998;
 }
 
 .star {

@@ -17,7 +17,7 @@ export default class Game {
     this.sayNewWord(this.wordsCounter);
   }
 
-  chechIfCorrect(card) {
+  checkIfCorrect(card) {
     const index = this.wordsCounter - 1;
     if (card.getAttribute('name') === cards[this.indexOfCategory][this.randomSequence[index]].word) {
       card.closest('.wordCardWrapper').classList.add('guessed');
@@ -33,6 +33,10 @@ export default class Game {
       setTimeout(() => { this.repeat(); }, 1000);
     }
   }
+
+  // updateStats(word, result) {
+
+  // }
 
   addStar(correct) {
     const starsWrapper = document.querySelector('.starsWrapper');
@@ -73,14 +77,14 @@ export default class Game {
   endGame() {
     const image = document.createElement('img');
     const message = document.createElement('h2');
-    const PlayMoreButton = document.createElement('button');
+    const playMoreButton = document.querySelector('.playMoreButton');
     const starsWrapper = document.querySelector('.starsWrapper');
     const stars = document.querySelectorAll('.star');
     stars.forEach((star) => {
       starsWrapper.appendChild(star);
     });
-    PlayMoreButton.classList.add('PlayMoreButton');
-    PlayMoreButton.textContent = 'Play more';
+
+    playMoreButton.textContent = 'Play more';
     const endGameSound = new Audio();
     const endGameMessageWrapper = document.createElement('div');
     endGameMessageWrapper.classList.add('endGameMessageWrapper');
@@ -109,9 +113,9 @@ export default class Game {
     endGameMessage.appendChild(image);
     endGameMessage.appendChild(message);
     endGameMessage.appendChild(starsWrapper);
-    endGameMessage.appendChild(PlayMoreButton);
-    PlayMoreButton.addEventListener('click', () => {
-      window.location.reload();
-    });
+    endGameMessage.appendChild(playMoreButton);
+    // playMoreButton.addEventListener('click', () => {
+    //   window.location.reload();
+    // });
   }
 }
