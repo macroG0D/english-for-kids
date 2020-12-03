@@ -113,6 +113,7 @@ export default class Game {
     endGameMessage.appendChild(image);
     endGameMessage.appendChild(message);
     endGameMessage.appendChild(starsWrapper);
+    playMoreButton.classList.remove('hidden');
     endGameMessage.appendChild(playMoreButton);
     // playMoreButton.addEventListener('click', () => {
     //   window.location.reload();

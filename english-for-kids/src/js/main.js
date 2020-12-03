@@ -193,8 +193,14 @@ function goHome() {
     categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink));
   });
 
-  const playMoreButton = document.createElement('button');
+  let playMoreButton = document.querySelector('.playMoreButton');
+
+  if (playMoreButton) {
+    playMoreButton.remove();
+  }
+  playMoreButton = document.createElement('button');
   playMoreButton.classList.add('playMoreButton');
+  playMoreButton.classList.add('hidden');
   main.appendChild(playMoreButton);
   playMoreButton.addEventListener('click', goHome);
 }
