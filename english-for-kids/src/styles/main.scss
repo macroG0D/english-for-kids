@@ -277,16 +277,15 @@ main {
   overflow: hidden;
   height: 30rem;
   width: 24rem;
-}
-
-.wordCard {
-  transition: all 0.35s ease-out;
-  perspective: 100rem;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transform-style: preserve-3d;
+  & .wordCard {
+    transition: all 0.35s ease-out;
+    perspective: 100rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+  }
 }
 
 .guessed {

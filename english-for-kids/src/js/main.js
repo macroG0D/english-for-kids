@@ -4,7 +4,7 @@ import GameMode from './models/GameMode';
 import Home from './models/Home';
 import Category from './models/Category';
 import Game from './models/Game';
-import Statistic from './models/Statistic';
+// import Statistic from './models/Statistic';
 
 const menu = new Menu('trainmode');
 
@@ -122,12 +122,14 @@ const startNewGame = function () {
   });
 };
 
-function removeRepeatButton() {
-  const repeatButton = document.querySelector('.repeat');
-  if (repeatButton) {
-    repeatButton.remove();
-  }
-  // startGameButton = document.querySelector('.startGameButton');
+function removeDeprecatedButtons() {
+  // const repeatButton = document.querySelector('.repeat');
+  // if (repeatButton) {
+  //   repeatButton.remove();
+  // }
+
+  // repeat button is inctance of startButton so even if no start button on layout,
+  // removing it will also remove the repeat button
   if (startGameButton) {
     startGameButton.remove();
   }
@@ -142,7 +144,7 @@ function removeEndGameWrapper() {
 
 function loadCategoryPage(selected) {
   removeEndGameWrapper();
-  removeRepeatButton();
+  removeDeprecatedButtons();
   setActiveMenuItem(selected);
   const selectedCategory = selected.getAttribute('name');
   clearCardsWrapper();
@@ -173,7 +175,7 @@ let currentMode;
 // menu main
 function goHome() {
   removeEndGameWrapper();
-  removeRepeatButton();
+  removeDeprecatedButtons();
   clearCardsWrapper();
   home.createHomeCards();
   categoryCards = document.querySelectorAll('.categoryCard');

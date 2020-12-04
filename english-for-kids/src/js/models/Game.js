@@ -17,9 +17,13 @@ export default class Game {
     this.sayNewWord(this.wordsCounter);
   }
 
+  cardsShortcut(index) {
+    return cards[this.indexOfCategory][this.randomSequence[index]];
+  }
+
   checkIfCorrect(card) {
     const index = this.wordsCounter - 1;
-    if (card.getAttribute('name') === cards[this.indexOfCategory][this.randomSequence[index]].word) {
+    if (card.getAttribute('name') === this.cardsShortcut(index).word) {
       card.closest('.wordCardWrapper').classList.add('guessed');
       this.addStar(true);
       if (this.wordsCounter < cards[this.indexOfCategory].length) {
@@ -59,7 +63,8 @@ export default class Game {
   repeat() {
     const index = this.wordsCounter - 1;
     const audio = new Audio();
-    audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
+    audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`;
+    // audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
     audio.addEventListener('canplaythrough', () => {
       audio.play();
     });
@@ -67,7 +72,8 @@ export default class Game {
 
   sayNewWord(index) {
     const audio = new Audio();
-    audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
+    audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`;
+    // audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
     audio.addEventListener('canplaythrough', () => {
       audio.play();
     });
@@ -83,8 +89,8 @@ export default class Game {
     stars.forEach((star) => {
       starsWrapper.appendChild(star);
     });
-
-    playMoreButton.textContent = 'Play more';
+    const playMoreText = 'Play more';
+    playMoreButton.textContent = playMoreText;
     const endGameSound = new Audio();
     const endGameMessageWrapper = document.createElement('div');
     endGameMessageWrapper.classList.add('endGameMessageWrapper');
