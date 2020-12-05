@@ -1,9 +1,3 @@
-// create table
-// table th: category, word, Translation, trained, correct, incorrect, %
-// repeat difficult words
-// reset
-// table takes data from local storage
-// can be sorted by th
 import {
   STATS_TABLE_HEADERS, ALL_CARDS, WORDS_AMOUNT,
 } from '../data/constants';
@@ -61,6 +55,9 @@ export default class Statistic {
         wordArr.push(ALL_CARDS[0][i - 1]);
         wordArr.push(ALL_CARDS[i][k].word);
         wordArr.push(ALL_CARDS[i][k].translation);
+        // wordArr.push(trained)
+        // wordArr.push(correct)
+        // wordArr.push(incorrect)
         this.statsToShow.push(wordArr);
       }
     }
@@ -87,7 +84,11 @@ export default class Statistic {
       tr.classList.add('tableRows');
       for (let k = 0; k < headers.length; k += 1) {
         const td = document.createElement('td');
-        td.textContent = this.statsToShow[j][k];
+        if (this.statsToShow[j][k] !== undefined) {
+          td.textContent = this.statsToShow[j][k];
+        } else {
+          td.textContent = '0';
+        }
         tr.appendChild(td);
       }
       statsTableBody.appendChild(tr);

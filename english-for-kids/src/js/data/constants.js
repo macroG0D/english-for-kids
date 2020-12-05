@@ -10,10 +10,10 @@ export const FAILURE_SOUND_URL = `${SOUNDS_URL}/failure.mp3`;
 export const CORRECT_STAR_URL = `${ICONS_URL}/star-correct.svg`;
 export const WRONG_STAR_URL = `${ICONS_URL}/star-wrong.svg`;
 export const FLIP_ICON_URL = `${ICONS_URL}/flip.svg`;
-export const WIN_IMAGE_URL = `${IMAGES_URL}/win.jpg`;
-export const LOOSE_IMAGE_URL = `${IMAGES_URL}/loose.jpg`;
+export const WIN_IMAGE_URL = `${IMAGES_URL}/gameWin.jpg`;
+export const LOOSE_IMAGE_URL = `${IMAGES_URL}/gameLoose.jpg`;
 
 // STATISTICS
-export const STATS_TABLE_HEADERS = ['category', 'word', 'translation', 'trained', 'correct', 'incorrect %'];
+export const STATS_TABLE_HEADERS = ['category', 'word', 'translation', 'trained', 'correct', 'incorrect', '%'];
 export const ALL_CARDS = cards;
 export const WORDS_AMOUNT = ALL_CARDS[0].length * (ALL_CARDS.length - 1);

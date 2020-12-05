@@ -5,6 +5,7 @@ import Home from './models/Home';
 import Category from './models/Category';
 import Game from './models/Game';
 import Statistic from './models/Statistic';
+import updateScore from './models/Scores';
 
 const menu = new Menu('trainmode');
 
@@ -88,9 +89,11 @@ const flip = function () {
 };
 
 const pronunciation = function () {
-  const pronouncedWord = this.getAttribute('sound');
+  const pronouncedWord = this.getAttribute('alt');
+  const pronouncedWordSound = this.getAttribute('sound');
+  updateScore('trained', pronouncedWord);
   const audio = new Audio();
-  audio.src = `./assets/${pronouncedWord}`;
+  audio.src = `./assets/${pronouncedWordSound}`;
   if (!category.fliped) {
     audio.addEventListener('canplaythrough', () => {
       audio.play();

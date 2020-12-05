@@ -35,10 +35,10 @@ const cards = [
       audioSrc: 'sounds/draw.mp3',
     },
     {
-      word: 'fish',
-      translation: 'ловить рыбу',
-      image: 'images/fishing.jpg',
-      audioSrc: 'sounds/fish.mp3',
+      word: 'eat',
+      translation: 'Кушать',
+      image: 'images/eat.jpg',
+      audioSrc: 'sounds/eat.mp3',
     },
     {
       word: 'fly',
@@ -111,10 +111,10 @@ const cards = [
   ],
   [
     {
-      word: 'laugh',
-      translation: 'смеяться',
-      image: 'images/laugh.jpg',
-      audioSrc: 'sounds/laugh.mp3',
+      word: 'walk',
+      translation: 'ходить',
+      image: 'images/walk.jpg',
+      audioSrc: 'sounds/walk.mp3',
     },
     {
       word: 'read',
@@ -153,10 +153,10 @@ const cards = [
       audioSrc: 'sounds/hide.mp3',
     },
     {
-      word: 'play',
-      translation: 'играть на инструменте',
-      image: 'images/play_music.jpg',
-      audioSrc: 'sounds/play.mp3',
+      word: 'swing',
+      translation: 'качаться на',
+      image: 'images/swing.jpg',
+      audioSrc: 'sounds/swing.mp3',
     },
   ],
   [

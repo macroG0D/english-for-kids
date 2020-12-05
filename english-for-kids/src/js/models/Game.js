@@ -3,6 +3,7 @@ import {
   CORRECT_SOUND_URL, ERROR_SOUND_URL, CORRECT_STAR_URL, WRONG_STAR_URL, SUCCESS_SOUND_URL,
   WIN_IMAGE_URL, LOOSE_IMAGE_URL, FAILURE_SOUND_URL,
 } from '../data/constants';
+import updateScore from './Scores';
 
 export default class Game {
   constructor(category) {
@@ -28,9 +29,11 @@ export default class Game {
 
   checkIfCorrect(card) {
     const index = this.wordsCounter - 1;
-    if (card.getAttribute('name') === this.cardsShortcut(index).word) {
+    const currentWord = this.cardsShortcut(index).word;
+    if (card.getAttribute('name') === currentWord) {
       card.closest('.wordCardWrapper').classList.add('guessed');
       this.addStar(true);
+      updateScore('correct', currentWord);
       if (this.wordsCounter < cards[this.indexOfCategory].length) {
         setTimeout(() => { this.sayNewWord(this.wordsCounter); }, 1000);
       } else {
@@ -38,14 +41,11 @@ export default class Game {
       }
     } else {
       this.addStar(false);
+      updateScore('incorrect', currentWord);
       this.win = false;
       setTimeout(() => { this.repeat(); }, 1000);
     }
   }
-
-  // updateStats(word, result) {
-
-  // }
 
   addStar(correct) {
     const starsWrapper = document.querySelector('.starsWrapper');
@@ -68,7 +68,7 @@ export default class Game {
   repeat() {
     const index = this.wordsCounter - 1;
     const audio = new Audio();
-    audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`;
+    try { audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`; } catch (e) { return; }
     audio.addEventListener('canplaythrough', () => {
       audio.play();
     });
