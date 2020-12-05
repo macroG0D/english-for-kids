@@ -36,9 +36,14 @@ const updateWordScore = function (mode, currentWord) {
     const correct = englishForKidsScores[currentWord][1];
     const incorrect = englishForKidsScores[currentWord][2];
     const total = correct + incorrect;
-    let result = (correct * 100) / total;
-    result = result.toFixed(2);
-    englishForKidsScores[currentWord][3] = result;
+    // % correct
+    let correctPercent = (correct * 100) / total;
+    correctPercent = correctPercent.toFixed(2);
+    englishForKidsScores[currentWord][3] = correctPercent;
+    // % incorrect
+    let wrongPercent = (incorrect * 100) / total;
+    wrongPercent = wrongPercent.toFixed(2);
+    englishForKidsScores[currentWord][4] = wrongPercent;
   }
 
   storeScores(englishForKidsScores);
@@ -50,7 +55,7 @@ const updateScore = function (mode, currentWord) {
   englishForKidsScores = JSON.parse(englishForKidsScores);
   if (!isWordExistInLS(currentWord)) {
     // if scores not exist set word's score to default
-    englishForKidsScores[currentWord] = [0, 0, 0, '0.00'];
+    englishForKidsScores[currentWord] = [0, 0, 0, '0.00', '0.00'];
     storeScores(englishForKidsScores);
   }
   // update word's score — increment needed value
@@ -62,5 +67,5 @@ export default updateScore;
 export const getScores = function (word) {
   let englishForKidsScores = localStorage.getItem('englishForKidsScores');
   englishForKidsScores = JSON.parse(englishForKidsScores);
-  return isWordExistInLS(word) ? englishForKidsScores[word] : ['0', '0', '0', ''];
+  return isWordExistInLS(word) ? englishForKidsScores[word] : ['0', '0', '0', '', '0.00'];
 };

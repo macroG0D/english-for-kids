@@ -59,6 +59,22 @@ export default class Category {
       wordCardWrapper.appendChild(wordCard);
       cardsWrapper.appendChild(wordCardWrapper);
     });
+
+    if (categoryCardsList.length === 0) {
+      const emptyStatsMessageWrapper = document.createElement('div');
+      emptyStatsMessageWrapper.classList.add('emptyStatsMessageWrapper');
+      const emptyStatsMessage = document.createElement('h1');
+      emptyStatsMessage.textContent = 'No weak words yet';
+      emptyStatsMessage.classList.add('emptyStatsMessage');
+      const playMoreButton = document.querySelector('.playMoreButton');
+      playMoreButton.classList.remove('hidden');
+      const TO_MAIN_PAGE_TEXT = 'Main page';
+      playMoreButton.textContent = TO_MAIN_PAGE_TEXT;
+      emptyStatsMessageWrapper.appendChild(emptyStatsMessage);
+      emptyStatsMessageWrapper.appendChild(playMoreButton);
+      cardsWrapper.appendChild(emptyStatsMessageWrapper);
+    }
+
     if (this.gameMode === 'play') {
       const startGameButton = document.createElement('button');
       startGameButton.classList.add('startGameButton');

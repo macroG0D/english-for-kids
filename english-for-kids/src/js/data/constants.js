@@ -14,6 +14,6 @@ export const WIN_IMAGE_URL = `${IMAGES_URL}/gameWin.jpg`;
 export const LOOSE_IMAGE_URL = `${IMAGES_URL}/gameLoose.jpg`;
 
 // STATISTICS
-export const STATS_TABLE_HEADERS = ['category', 'word', 'translation', 'trained', 'correct', 'incorrect', '%'];
+export const STATS_TABLE_HEADERS = ['category', 'word', 'translation', 'trained', 'correct', 'incorrect', '% correct', '% incorrect'];
 export const ALL_CARDS = cards;
 export const WORDS_AMOUNT = ALL_CARDS[0].length * (ALL_CARDS.length - 1);

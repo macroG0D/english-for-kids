@@ -81,6 +81,7 @@ export default class Statistic {
         wordArr.push(getScores(ALL_CARDS[i][k].word)[1]);
         wordArr.push(getScores(ALL_CARDS[i][k].word)[2]);
         wordArr.push(getScores(ALL_CARDS[i][k].word)[3]);
+        wordArr.push(getScores(ALL_CARDS[i][k].word)[4]);
         this.statsToShow.push(wordArr);
       }
     }
@@ -181,16 +182,19 @@ export default class Statistic {
     const BOARD_SIZE = 8;
     const weakWordsTemp = Array.from(this.statsToShow);
     const weakWords = []; // is what i need to show when click repeat difficult words
-    weakWordsTemp.sort((a, b) => a[6] - b[6]);
+    weakWordsTemp.sort((a, b) => a[7] - b[7]);
+    weakWordsTemp.reverse();
     weakWordsTemp.length = BOARD_SIZE;
     weakWordsTemp.forEach((weakWord) => {
-      const indexOfCategory = cards[0].indexOf(weakWord[0]);
-      const currentWeakWord = weakWord[1];
-      cards[indexOfCategory + 1].forEach((card) => {
-        if (card.word === currentWeakWord) {
-          weakWords.push(card);
-        }
-      });
+      if (weakWord[5] !== '0' && weakWord[6] !== '100.00') {
+        const indexOfCategory = cards[0].indexOf(weakWord[0]);
+        const currentWeakWord = weakWord[1];
+        cards[indexOfCategory + 1].forEach((card) => {
+          if (card.word === currentWeakWord) {
+            weakWords.push(card);
+          }
+        });
+      }
     });
     return weakWords;
   }
