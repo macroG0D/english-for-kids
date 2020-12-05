@@ -5,14 +5,20 @@ export default class Category {
   constructor(category, gameMode) {
     this.category = category;
     this.gameMode = gameMode;
-    this.init();
     this.fliped = false;
   }
 
-  init() {
+  init(difficultWords) {
     const cardsWrapper = document.querySelector('.cards-wrapper');
-    const categoryIndex = cards[0].indexOf(this.category);
-    const categoryCardsList = cards[categoryIndex + 1];
+    let categoryCardsList;
+
+    if (this.gameMode === 'repeatDifficult') {
+      categoryCardsList = difficultWords;
+    } else {
+      const categoryIndex = cards[0].indexOf(this.category);
+      categoryCardsList = cards[categoryIndex + 1];
+    }
+
     categoryCardsList.forEach((card) => {
       const wordCardWrapper = document.createElement('div');
       wordCardWrapper.classList.add('wordCardWrapper');

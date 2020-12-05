@@ -2,7 +2,7 @@ export const initStorage = function () {
   const englishForKidsScores = localStorage.getItem('englishForKidsScores');
   if (englishForKidsScores) {
     return;
-  } // else store
+  } // else store data
   localStorage.setItem('englishForKidsScores', JSON.stringify({}));
 };
 
@@ -25,7 +25,6 @@ const updateWordScore = function (mode, currentWord) {
   englishForKidsScores = JSON.parse(englishForKidsScores);
   // mode can be trained / correct / incorrect
   if (mode === 'trained') {
-    console.log('trained!');
     englishForKidsScores[currentWord][0] += 1;
   } else if (mode === 'correct') {
     englishForKidsScores[currentWord][1] += 1;
@@ -63,5 +62,5 @@ export default updateScore;
 export const getScores = function (word) {
   let englishForKidsScores = localStorage.getItem('englishForKidsScores');
   englishForKidsScores = JSON.parse(englishForKidsScores);
-  return isWordExistInLS(word) ? englishForKidsScores[word] : ['0', '0', '0', '0.00'];
+  return isWordExistInLS(word) ? englishForKidsScores[word] : ['0', '0', '0', ''];
 };

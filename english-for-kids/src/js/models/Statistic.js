@@ -2,10 +2,10 @@ import {
   STATS_TABLE_HEADERS, ALL_CARDS, WORDS_AMOUNT,
 } from '../data/constants';
 import { getScores, initStorage } from './Scores';
+import cards from '../data/cards';
 
 export default class Statistic {
   constructor() {
-    this.data = localStorage.getItem('stats');
     this.statsToShow = [];
   }
 
@@ -16,6 +16,7 @@ export default class Statistic {
     if (bluredBackground) {
       bluredBackground.remove();
     }
+
     const headers = STATS_TABLE_HEADERS;
     const main = document.querySelector('main');
     bluredBackground = document.createElement('div');
@@ -48,6 +49,25 @@ export default class Statistic {
       }
     });
     this.loadStatsPage();
+    // create stats buttons
+    this.createStatsButtons();
+  }
+
+  createStatsButtons() {
+    const statsButtonsWrapper = document.createElement('div');
+    statsButtonsWrapper.classList.add('statsButtonsWrapper');
+    const resetButton = document.createElement('button');
+    resetButton.classList.add('resetData');
+    const resetButtonText = 'Reset';
+    resetButton.textContent = resetButtonText;
+    const repeatDifficultWords = document.createElement('button');
+    repeatDifficultWords.classList.add('repeatDifficultWords');
+    const repeatDifficultWordsText = 'Repeat difficult words';
+    repeatDifficultWords.textContent = repeatDifficultWordsText;
+    statsButtonsWrapper.appendChild(resetButton);
+    statsButtonsWrapper.appendChild(repeatDifficultWords);
+    const main = document.querySelector('main');
+    main.appendChild(statsButtonsWrapper);
   }
 
   allCardsTransform() {
@@ -109,8 +129,6 @@ export default class Statistic {
       context.classList.remove('tableHeaders__down');
       context.classList.add('tableHeaders__up');
     }
-    console.log(indexOfHeader);
-    console.log(this.statsToShow[indexOfHeader]);
     this.loadStatsPage(STATS_TABLE_HEADERS, this.statsToShow);
   }
 
@@ -152,5 +170,28 @@ export default class Statistic {
     } else if (hasArrowDown && hasArrowDown !== context) {
       hasArrowDown.classList.remove('tableHeaders__down');
     }
+  }
+
+  reset() {
+    localStorage.removeItem('englishForKidsScores');
+    window.location.reload();
+  }
+
+  difficultWords() {
+    const BOARD_SIZE = 8;
+    const weakWordsTemp = Array.from(this.statsToShow);
+    const weakWords = []; // is what i need to show when click repeat difficult words
+    weakWordsTemp.sort((a, b) => a[6] - b[6]);
+    weakWordsTemp.length = BOARD_SIZE;
+    weakWordsTemp.forEach((weakWord) => {
+      const indexOfCategory = cards[0].indexOf(weakWord[0]);
+      const currentWeakWord = weakWord[1];
+      cards[indexOfCategory + 1].forEach((card) => {
+        if (card.word === currentWeakWord) {
+          weakWords.push(card);
+        }
+      });
+    });
+    return weakWords;
   }
 }

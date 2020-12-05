@@ -36,7 +36,7 @@ const cards = [
     },
     {
       word: 'eat',
-      translation: 'Кушать',
+      translation: 'кушать',
       image: 'images/eat.jpg',
       audioSrc: 'sounds/eat.mp3',
     },

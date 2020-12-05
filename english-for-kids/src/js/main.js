@@ -8,7 +8,7 @@ import Statistic from './models/Statistic';
 import updateScore from './models/Scores';
 
 const menu = new Menu('trainmode');
-
+let goHome = '';
 // burger and side menu
 const burger = document.querySelector('.burger_menu');
 const main = document.querySelector('main');
@@ -17,6 +17,18 @@ const footer = document.querySelector('footer');
 
 const bluredBackgound = document.createElement('div');
 bluredBackgound.classList.add('bluredBackgound');
+
+let playMoreButton = document.querySelector('.playMoreButton');
+
+const createPlayMoreButton = function () {
+  if (playMoreButton) {
+    playMoreButton.remove();
+  }
+  playMoreButton = document.createElement('button');
+  playMoreButton.classList.add('playMoreButton');
+  playMoreButton.classList.add('hidden');
+  main.appendChild(playMoreButton);
+};
 
 const menuController = function (e) {
   if (e.target.classList.contains('burger_menu') || e.target.classList.contains('burger')) {
@@ -47,12 +59,13 @@ let categoryCards = document.querySelectorAll('.categoryCard');
 const gameMode = new GameMode(main);
 const modeBtn = document.querySelector('.playmode');
 const mainLink = document.querySelector('.mainMenu');
+const statsLink = document.querySelector('.statistic');
 const home = new Home();
 const cardsWrapper = document.querySelector('.cards-wrapper');
 let endGameWrapper;
 
 function clearCardsWrapper() {
-  cardsWrapper.innerHTML = ''; // remove all from
+  cardsWrapper.innerHTML = '';
 }
 
 function setActiveMenuItem(newAvtiveMenuItem) {
@@ -66,6 +79,8 @@ function setActiveMenuItem(newAvtiveMenuItem) {
     const newActive = document.querySelector(`[name="${newAvtiveMenuItem.getAttribute('name')}"]`);
     newActive.classList.add('activeMenuItem');
   }
+  createPlayMoreButton();
+  playMoreButton.addEventListener('click', goHome);
 }
 
 const flipBack = function () {
@@ -142,22 +157,34 @@ function removeEndGameWrapper() {
 
 function removeStatsWrapper() {
   const statsTable = document.querySelector('.statsBackgound');
+  const statsButtonsWrapper = document.querySelector('.statsButtonsWrapper');
   if (statsTable) {
     statsTable.remove();
+    statsButtonsWrapper.remove();
   }
 }
 
-function loadCategoryPage(selected) {
+function loadCategoryPage(selected, trainDifficultWords) {
   removeEndGameWrapper();
   removeDeprecatedButtons();
-  setActiveMenuItem(selected);
   removeStatsWrapper();
-  const selectedCategory = selected.getAttribute('name');
-  clearCardsWrapper();
+  let selectedCategory;
+
   if (category) {
     category = null; // set class instance to null
   }
-  category = new Category(selectedCategory, gameMode.mode);
+
+  if (trainDifficultWords === true) {
+    category = new Category(selectedCategory, 'repeatDifficult');
+    category.init(selected);
+  } else {
+    setActiveMenuItem(selected);
+    selectedCategory = selected.getAttribute('name');
+    clearCardsWrapper();
+    category = new Category(selectedCategory, gameMode.mode);
+    category.init();
+  }
+
   menu.hideMenu(bluredBackgound);
   const flipButtons = document.querySelectorAll('.flipButton');
   if (flipButtons) {
@@ -176,10 +203,11 @@ function loadCategoryPage(selected) {
     startGameButton.addEventListener('click', startNewGame);
   }
 }
+
 let currentMode;
 
 // menu main
-function goHome() {
+goHome = function () {
   removeEndGameWrapper();
   removeDeprecatedButtons();
   clearCardsWrapper();
@@ -190,7 +218,7 @@ function goHome() {
   setActiveMenuItem(mainLink);
 
   categoryCards.forEach((categoryCard) => {
-    categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard));
+    categoryCard.addEventListener('click', loadCategoryPage.bind(null, categoryCard, false));
   });
   if (currentMode === 'play') {
     categoryCards.forEach((categoryCard) => {
@@ -199,20 +227,11 @@ function goHome() {
   }
 
   categoryLinks.forEach((categoryLink) => {
-    categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink));
+    categoryLink.addEventListener('click', loadCategoryPage.bind(null, categoryLink, false));
   });
-
-  let playMoreButton = document.querySelector('.playMoreButton');
-
-  if (playMoreButton) {
-    playMoreButton.remove();
-  }
-  playMoreButton = document.createElement('button');
-  playMoreButton.classList.add('playMoreButton');
-  playMoreButton.classList.add('hidden');
-  main.appendChild(playMoreButton);
+  createPlayMoreButton();
   playMoreButton.addEventListener('click', goHome);
-}
+};
 
 const switchMode = function () {
   gameMode.toggleAppMode();
@@ -235,10 +254,20 @@ const logo = document.querySelector('.logo');
 logo.addEventListener('click', homepage);
 
 const statistic = document.querySelector('.statistic');
+
+const repeatDifficultWords = function (statsPage) {
+  loadCategoryPage(statsPage.difficultWords(), true);
+};
+
 statistic.addEventListener('click', () => {
+  if (gameMode.mode === 'play') {
+    switchMode();
+  }
+  setActiveMenuItem(statsLink);
   removeEndGameWrapper();
   removeDeprecatedButtons();
   clearCardsWrapper();
+  removeStatsWrapper();
   menu.hideMenu(bluredBackgound);
   const statsPage = new Statistic();
   statsPage.init();
@@ -246,8 +275,8 @@ statistic.addEventListener('click', () => {
   tableHeaders.forEach((th) => {
     th.addEventListener('click', statsPage.sort.bind(statsPage, th));
   });
+  const resetButton = document.querySelector('.resetData');
+  const repeatDifficultWordsBtn = document.querySelector('.repeatDifficultWords');
+  resetButton.addEventListener('click', statsPage.reset.bind(statsPage));
+  repeatDifficultWordsBtn.addEventListener('click', repeatDifficultWords.bind(null, statsPage));
 });
-
-// const statsPage = new Statistic();
-// statsPage.init();
-// statsPage.allCardsTransform();
