@@ -1,6 +1,7 @@
 import {
   STATS_TABLE_HEADERS, ALL_CARDS, WORDS_AMOUNT,
 } from '../data/constants';
+import { getScores, initStorage } from './Scores';
 
 export default class Statistic {
   constructor() {
@@ -9,6 +10,7 @@ export default class Statistic {
   }
 
   init() {
+    initStorage();
     this.allCardsTransform();
     let bluredBackground = document.querySelector('.statsBackgound');
     if (bluredBackground) {
@@ -55,9 +57,10 @@ export default class Statistic {
         wordArr.push(ALL_CARDS[0][i - 1]);
         wordArr.push(ALL_CARDS[i][k].word);
         wordArr.push(ALL_CARDS[i][k].translation);
-        // wordArr.push(trained)
-        // wordArr.push(correct)
-        // wordArr.push(incorrect)
+        wordArr.push(getScores(ALL_CARDS[i][k].word)[0]);
+        wordArr.push(getScores(ALL_CARDS[i][k].word)[1]);
+        wordArr.push(getScores(ALL_CARDS[i][k].word)[2]);
+        wordArr.push(getScores(ALL_CARDS[i][k].word)[3]);
         this.statsToShow.push(wordArr);
       }
     }
@@ -84,11 +87,7 @@ export default class Statistic {
       tr.classList.add('tableRows');
       for (let k = 0; k < headers.length; k += 1) {
         const td = document.createElement('td');
-        if (this.statsToShow[j][k] !== undefined) {
-          td.textContent = this.statsToShow[j][k];
-        } else {
-          td.textContent = '0';
-        }
+        td.textContent = this.statsToShow[j][k];
         tr.appendChild(td);
       }
       statsTableBody.appendChild(tr);
@@ -110,7 +109,8 @@ export default class Statistic {
       context.classList.remove('tableHeaders__down');
       context.classList.add('tableHeaders__up');
     }
-
+    console.log(indexOfHeader);
+    console.log(this.statsToShow[indexOfHeader]);
     this.loadStatsPage(STATS_TABLE_HEADERS, this.statsToShow);
   }
 

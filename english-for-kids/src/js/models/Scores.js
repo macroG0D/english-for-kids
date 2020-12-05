@@ -1,4 +1,4 @@
-const checkIfStorageExist = function () {
+export const initStorage = function () {
   const englishForKidsScores = localStorage.getItem('englishForKidsScores');
   if (englishForKidsScores) {
     return;
@@ -46,12 +46,12 @@ const updateWordScore = function (mode, currentWord) {
 };
 
 const updateScore = function (mode, currentWord) {
-  checkIfStorageExist();
+  initStorage();
   let englishForKidsScores = localStorage.getItem('englishForKidsScores');
   englishForKidsScores = JSON.parse(englishForKidsScores);
   if (!isWordExistInLS(currentWord)) {
     // if scores not exist set word's score to default
-    englishForKidsScores[currentWord] = [0, 0, 0, 0];
+    englishForKidsScores[currentWord] = [0, 0, 0, '0.00'];
     storeScores(englishForKidsScores);
   }
   // update word's score — increment needed value
@@ -59,3 +59,9 @@ const updateScore = function (mode, currentWord) {
 };
 
 export default updateScore;
+
+export const getScores = function (word) {
+  let englishForKidsScores = localStorage.getItem('englishForKidsScores');
+  englishForKidsScores = JSON.parse(englishForKidsScores);
+  return isWordExistInLS(word) ? englishForKidsScores[word] : ['0', '0', '0', '0.00'];
+};
