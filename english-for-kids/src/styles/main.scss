@@ -62,11 +62,12 @@ header {
   z-index: 99999;
 }
 
-.bluredBackgound {
+.bluredBackgound, .statsBackgound {
   position: fixed;
   z-index: 997;
   width: 100vw;
   height: 100vw;
+  top: 0;
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(255, 184, 188, 0.3) 0%,
@@ -530,4 +531,92 @@ h2 {
       color: #000;
     }
   }
+}
+
+.statsBackgound {
+  cursor: auto;
+}
+
+.statsTable, .statsTableHeaders {
+  width: 100%;
+  display: flex;
+  margin: 10rem auto;
+  position: absolute;
+  height: 50rem;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.statsTable {
+  margin: 16rem auto;
+  transform: translateX(0.5rem);
+}
+
+tbody {
+  position: absolute;
+  top: 0;
+  font-size: 1.4rem;
+  max-height: 80vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 1rem;    
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1rem rgb(255, 255, 255);
+    border-radius: 1rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #be8bff;
+    border-radius: 1rem;
+  }
+}
+
+tr {
+  background-color: #fff;
+}
+
+.tableHeaders {
+  height: 6rem;
+  width: 18rem;
+  text-transform: uppercase;
+  background-color: #be8bff;
+  cursor: pointer;
+  color: #fff;
+  user-select: none;
+  letter-spacing: 0.05rem;
+  &:first-child {
+    border-radius: 1rem 0 0 0;
+  }
+  &:last-child {
+    border-radius: 0 1rem 0 0;
+  }
+  &:hover {
+    background-color: #a775e9;
+    letter-spacing: 0.12rem;
+  }
+  &__up {
+    position: relative;
+    &:after {
+      content: url(../assets/icons/sort_up.svg);
+      position: absolute;
+      top: 1.8rem;
+      margin-left: .5rem;
+    }
+  }
+  &__down {
+    &:after {
+      content: url(../assets/icons/sort_down.svg);
+      position: absolute;
+      top: 2rem;
+      margin-left: .5rem;
+    }
+  }
+}
+
+td {
+  background-color: #fff;
+  padding: 1rem;
+  width: 18rem;
+  height: 5rem;
 }

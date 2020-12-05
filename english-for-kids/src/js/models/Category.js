@@ -1,4 +1,5 @@
 import cards from '../data/cards';
+import { FLIP_ICON_URL } from '../data/constants';
 
 export default class Category {
   constructor(category, gameMode) {
@@ -45,7 +46,7 @@ export default class Category {
         const flipButton = document.createElement('button');
         flipButton.classList.add('flipButton');
         const flipIcon = document.createElement('img');
-        flipIcon.src = './assets/icons/flip.svg';
+        flipIcon.src = FLIP_ICON_URL;
         flipButton.appendChild(flipIcon);
         wordCardTitleWrapper.appendChild(flipButton);
       }

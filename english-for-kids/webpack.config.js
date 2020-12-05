@@ -18,6 +18,7 @@ module.exports = {
     main: ['@babel/polyfill', './js/main.js'],
   },
   output: {
+    publicPath: '',
     filename: filename('js'),
     path: path.resolve(__dirname, 'dist'),
   },

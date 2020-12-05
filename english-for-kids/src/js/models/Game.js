@@ -1,9 +1,14 @@
 import cards from '../data/cards';
+import {
+  CORRECT_SOUND_URL, ERROR_SOUND_URL, CORRECT_STAR_URL, WRONG_STAR_URL, SUCCESS_SOUND_URL,
+  WIN_IMAGE_URL, LOOSE_IMAGE_URL, FAILURE_SOUND_URL,
+} from '../data/constants';
 
 export default class Game {
   constructor(category) {
     this.category = category;
-    this.indexOfCategory = cards[0].indexOf(this.category) + 1;
+    this.indexOfCategory = (cards[0]?.indexOf(this.category) > -1
+      ? cards[0].indexOf(this.category) : 0) + 1;
     this.randomSequence = [];
     this.wordsCounter = 0;
     this.win = true;
@@ -47,15 +52,15 @@ export default class Game {
     const newStar = document.createElement('img');
     newStar.classList.add('star');
     const correctSound = new Audio();
-    correctSound.src = './assets/sounds/correct.mp3';
+    correctSound.src = CORRECT_SOUND_URL;
     const wrondSound = new Audio();
-    wrondSound.src = './assets/sounds/wrong.mp3';
+    wrondSound.src = ERROR_SOUND_URL;
     if (correct) {
       correctSound.play();
-      newStar.src = './assets/icons/star-correct.svg';
+      newStar.src = CORRECT_STAR_URL;
     } else {
       wrondSound.play();
-      newStar.src = './assets/icons/star-wrong.svg';
+      newStar.src = WRONG_STAR_URL;
     }
     starsWrapper.append(newStar);
   }
@@ -64,7 +69,6 @@ export default class Game {
     const index = this.wordsCounter - 1;
     const audio = new Audio();
     audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`;
-    // audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
     audio.addEventListener('canplaythrough', () => {
       audio.play();
     });
@@ -73,7 +77,6 @@ export default class Game {
   sayNewWord(index) {
     const audio = new Audio();
     audio.src = `./assets/${this.cardsShortcut(index).audioSrc}`;
-    // audio.src = `./assets/${cards[this.indexOfCategory][this.randomSequence[index]].audioSrc}`;
     audio.addEventListener('canplaythrough', () => {
       audio.play();
     });
@@ -106,23 +109,22 @@ export default class Game {
     repeatButton.remove();
     this.randomSequence = [];
     if (this.win) {
-      message.textContent = 'You Won';
-      endGameSound.src = './assets/sounds/success.mp3';
+      const youWon = 'You Won';
+      message.textContent = youWon;
+      endGameSound.src = SUCCESS_SOUND_URL;
       endGameSound.play();
-      image.src = './assets/images/win.jpg';
+      image.src = WIN_IMAGE_URL;
     } else {
-      message.textContent = 'You Lost';
-      endGameSound.src = './assets/sounds/failure.mp3';
+      const youLost = 'You Lost';
+      message.textContent = youLost;
+      endGameSound.src = FAILURE_SOUND_URL;
       endGameSound.play();
-      image.src = './assets/images/loose.jpg';
+      image.src = LOOSE_IMAGE_URL;
     }
     endGameMessage.appendChild(image);
     endGameMessage.appendChild(message);
     endGameMessage.appendChild(starsWrapper);
     playMoreButton.classList.remove('hidden');
     endGameMessage.appendChild(playMoreButton);
-    // playMoreButton.addEventListener('click', () => {
-    //   window.location.reload();
-    // });
   }
 }

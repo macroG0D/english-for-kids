@@ -4,7 +4,7 @@ import GameMode from './models/GameMode';
 import Home from './models/Home';
 import Category from './models/Category';
 import Game from './models/Game';
-// import Statistic from './models/Statistic';
+import Statistic from './models/Statistic';
 
 const menu = new Menu('trainmode');
 
@@ -123,11 +123,6 @@ const startNewGame = function () {
 };
 
 function removeDeprecatedButtons() {
-  // const repeatButton = document.querySelector('.repeat');
-  // if (repeatButton) {
-  //   repeatButton.remove();
-  // }
-
   // repeat button is inctance of startButton so even if no start button on layout,
   // removing it will also remove the repeat button
   if (startGameButton) {
@@ -142,10 +137,18 @@ function removeEndGameWrapper() {
   }
 }
 
+function removeStatsWrapper() {
+  const statsTable = document.querySelector('.statsBackgound');
+  if (statsTable) {
+    statsTable.remove();
+  }
+}
+
 function loadCategoryPage(selected) {
   removeEndGameWrapper();
   removeDeprecatedButtons();
   setActiveMenuItem(selected);
+  removeStatsWrapper();
   const selectedCategory = selected.getAttribute('name');
   clearCardsWrapper();
   if (category) {
@@ -177,6 +180,7 @@ function goHome() {
   removeEndGameWrapper();
   removeDeprecatedButtons();
   clearCardsWrapper();
+  removeStatsWrapper();
   home.createHomeCards();
   categoryCards = document.querySelectorAll('.categoryCard');
   menu.hideMenu(bluredBackgound);
@@ -229,5 +233,18 @@ logo.addEventListener('click', homepage);
 
 const statistic = document.querySelector('.statistic');
 statistic.addEventListener('click', () => {
-  console.log('statistic');
+  removeEndGameWrapper();
+  removeDeprecatedButtons();
+  clearCardsWrapper();
+  menu.hideMenu(bluredBackgound);
+  const statsPage = new Statistic();
+  statsPage.init();
+  const tableHeaders = document.querySelectorAll('.tableHeaders');
+  tableHeaders.forEach((th) => {
+    th.addEventListener('click', statsPage.sort.bind(statsPage, th));
+  });
 });
+
+// const statsPage = new Statistic();
+// statsPage.init();
+// statsPage.allCardsTransform();
