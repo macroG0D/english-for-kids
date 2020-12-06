@@ -9,7 +9,6 @@ export default class Menu {
 
   hideMenu(bluredBackgound) {
     this.opened = false;
-    this.burger.style.transform = 'rotateZ(0deg)';
     this.burger.classList.remove('burger_menu__active');
     this.sideMenu.style.left = '-32rem';
     bluredBackgound.remove();
@@ -17,7 +16,6 @@ export default class Menu {
 
   showMenu(bluredBackgound) {
     this.opened = true;
-    this.burger.style.transform = 'rotateZ(-90deg)';
     this.burger.classList.add('burger_menu__active');
     this.sideMenu.style.left = '0';
     this.main.append(bluredBackgound);

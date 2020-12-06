@@ -13,6 +13,7 @@ export default class Game {
     this.randomSequence = [];
     this.wordsCounter = 0;
     this.win = true;
+    this.incorrectsCount = 0;
   }
 
   startGame() {
@@ -41,8 +42,9 @@ export default class Game {
       }
     } else {
       this.addStar(false);
-      updateScore('incorrect', currentWord);
       this.win = false;
+      this.incorrectsCount += 1;
+      updateScore('incorrect', currentWord);
       setTimeout(() => { this.repeat(); }, 1000);
     }
   }
@@ -85,7 +87,9 @@ export default class Game {
 
   endGame() {
     const image = document.createElement('img');
-    const message = document.createElement('h2');
+    const messageHeader = document.createElement('h2');
+    const messageBody = document.createElement('p');
+    messageBody.classList.add('messageBody');
     const playMoreButton = document.querySelector('.playMoreButton');
     const starsWrapper = document.querySelector('.starsWrapper');
     const stars = document.querySelectorAll('.star');
@@ -110,21 +114,26 @@ export default class Game {
     this.randomSequence = [];
     if (this.win) {
       const youWon = 'You Won';
-      message.textContent = youWon;
+      messageHeader.textContent = youWon;
       endGameSound.src = SUCCESS_SOUND_URL;
       endGameSound.play();
       image.src = WIN_IMAGE_URL;
     } else {
       const youLost = 'You Lost';
-      message.textContent = youLost;
+      const errorsText = `${this.incorrectsCount} wrong answers`;
+      messageHeader.textContent = youLost;
+      messageBody.textContent = errorsText;
       endGameSound.src = FAILURE_SOUND_URL;
       endGameSound.play();
       image.src = LOOSE_IMAGE_URL;
     }
     endGameMessage.appendChild(image);
-    endGameMessage.appendChild(message);
+    endGameMessage.appendChild(messageHeader);
+    endGameMessage.appendChild(messageBody);
     endGameMessage.appendChild(starsWrapper);
     playMoreButton.classList.remove('hidden');
     endGameMessage.appendChild(playMoreButton);
+    // eslint-disable-next-line no-implied-eval
+    setTimeout('location.reload(true);', 4000);
   }
 }

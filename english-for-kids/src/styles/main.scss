@@ -62,7 +62,8 @@ header {
   z-index: 99999;
 }
 
-.bluredBackgound, .statsBackgound {
+.bluredBackgound,
+.statsBackgound {
   position: fixed;
   z-index: 997;
   width: 100vw;
@@ -86,31 +87,42 @@ header {
   .burger {
     transition: all 0.25s ease-in-out;
     width: 2.6rem;
-    height: 0.2rem;
-    background-color: #000;
-    position: absolute;
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
+    height: 1.5rem;
+    position: relative;
+    & .burger_icon_line {
+      pointer-events: none;
       width: 2.6rem;
       height: 0.2rem;
       background-color: #000;
-    }
-    &:before {
-      bottom: -0.6rem;
-    }
-    &:after {
-      bottom: -1.2rem;
+      position: absolute;
+      &:first-child {
+        top: 0rem;
+      }
+      &:nth-child(2) {
+        top: 0.6rem;
+      }
+      &:last-child {
+        top: 1.2rem;
+      }
     }
   }
   &__active {
     .burger {
-      &:before {
-        bottom: -0.9rem;
-      }
-      &:after {
-        bottom: -1.8rem;
+      & .burger_icon_line {
+        &:first-child {
+          top: .5rem;
+          transform: rotateZ(45deg);
+        }
+        &:nth-child(2) {
+          top: 0.6rem;
+          opacity: 0;
+          transform: rotateZ(-45deg);
+          transform: scale(0);
+        }
+        &:last-child {
+          top: .5rem;
+          transform: rotateZ(-45deg);
+        }
       }
     }
   }
@@ -494,6 +506,12 @@ h2 {
   & h2 {
     font-size: 2.4rem;
     text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  & .messageBody {
+    font-size: 1.8rem;
+    color: #000;
+    margin: 1rem;
   }
 
   .starsWrapper {
@@ -536,7 +554,8 @@ h2 {
   cursor: auto;
 }
 
-.statsTable, .statsTableHeaders {
+.statsTable,
+.statsTableHeaders {
   width: 100%;
   display: flex;
   margin: 10rem auto;
@@ -559,7 +578,7 @@ tbody {
   max-height: 80vh;
   overflow: auto;
   &::-webkit-scrollbar {
-    width: 1rem;    
+    width: 1rem;
   }
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1rem rgb(255, 255, 255);
@@ -600,7 +619,7 @@ tr {
       content: url(../assets/icons/sort_up.svg);
       position: absolute;
       top: 1.8rem;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
   &__down {
@@ -608,7 +627,7 @@ tr {
       content: url(../assets/icons/sort_down.svg);
       position: absolute;
       top: 2rem;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
 }
@@ -635,7 +654,8 @@ td {
   justify-content: space-evenly;
 }
 
-.resetData, .repeatDifficultWords {
+.resetData,
+.repeatDifficultWords {
   padding: 0 2.5rem;
   border-radius: 2rem;
   height: 6rem;
