@@ -133,7 +133,23 @@ export default class Game {
     endGameMessage.appendChild(starsWrapper);
     playMoreButton.classList.remove('hidden');
     endGameMessage.appendChild(playMoreButton);
-    // eslint-disable-next-line no-implied-eval
-    setTimeout('location.reload(true);', 4000);
+
+    function reloadApp() {
+      window.location.reload();
+    }
+
+    let TIMEOUTID;
+
+    function deleyedReload() {
+      TIMEOUTID = window.setTimeout(reloadApp, 4000);
+      console.log(TIMEOUTID);
+    }
+    deleyedReload();
+    const playModeBtn = document.querySelector('.playmode');
+    const burgerMenu = document.querySelector('.burger_menu');
+    playMoreButton.onclick = window.clearTimeout.bind(null, TIMEOUTID);
+    playModeBtn.onclick = window.clearTimeout.bind(null, TIMEOUTID);
+    burgerMenu.onclick = window.clearTimeout.bind(null, TIMEOUTID);
+    console.log(TIMEOUTID);
   }
 }
