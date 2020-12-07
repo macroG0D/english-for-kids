@@ -5,6 +5,7 @@ export default class Menu {
     this.sideMenu = document.querySelector('.sideMenu');
     this.burger = document.querySelector('.burger_menu');
     this.main = document.querySelector('main');
+    this.body = document.querySelector('body');
   }
 
   hideMenu(bluredBackgound) {
@@ -12,6 +13,7 @@ export default class Menu {
     this.burger.classList.remove('burger_menu__active');
     this.sideMenu.style.left = '-32rem';
     bluredBackgound.remove();
+    this.body.style.overflow = 'auto';
   }
 
   showMenu(bluredBackgound) {
@@ -19,5 +21,6 @@ export default class Menu {
     this.burger.classList.add('burger_menu__active');
     this.sideMenu.style.left = '0';
     this.main.append(bluredBackgound);
+    this.body.style.overflow = 'hidden';
   }
 }
