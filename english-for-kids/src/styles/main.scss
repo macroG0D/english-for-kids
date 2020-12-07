@@ -19,6 +19,7 @@ body {
   background: black;
   margin: 0;
   padding: 0;
+  overflow: auto;
 }
 
 a {
@@ -143,6 +144,9 @@ header {
     margin-top: 12.5rem;
     list-style-type: none;
     color: #fff;
+    @media (max-height: 630px) {
+      margin-top: 10rem;
+    }
   }
   &__listItemHeader {
     font-size: 1.8rem;
@@ -155,6 +159,9 @@ header {
       margin-bottom: 0;
       user-select: none;
       pointer-events: none;
+    }
+    @media (max-height: 630px) {
+      margin: 2rem 0;
     }
   }
   &__listItem {
@@ -413,7 +420,7 @@ h2 {
 .repeat {
   position: fixed;
   bottom: 10rem;
-  z-index: 9999;
+  z-index: 995;
   cursor: pointer;
   height: 6rem;
 }
@@ -496,7 +503,7 @@ h2 {
   position: fixed;
   display: flex;
   justify-content: center;
-  z-index: 998;
+  z-index: 995;
 }
 
 .star {
@@ -514,6 +521,7 @@ h2 {
   padding: 10rem 0;
   display: flex;
   justify-content: center;
+  z-index: 996;
   .bluredBackgound {
     cursor: auto;
   }
@@ -632,7 +640,6 @@ h2 {
 
 .statsBackgound {
   cursor: auto;
-  padding: 10rem 0 15rem;
 }
 
 .statsTable,
@@ -641,25 +648,32 @@ h2 {
   display: flex;
   margin: 10rem auto;
   position: absolute;
-  height: 50rem;
   top: 0;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1520px) {
+  }
 }
 
 .statsTable {
   margin: 16rem auto;
   transform: translateX(0.5rem);
+  @media (max-width: 1310px) {
+    transform: translateX(0rem);
+  }
 }
 
 tbody {
   position: absolute;
   top: 0;
   font-size: 1.4rem;
-  height: calc(100vh - 31rem);
+  height: calc(100vh - 29rem);
   overflow: auto;
   &::-webkit-scrollbar {
     width: 1rem;
+    @media (max-width: 1310px) {
+      display: none;
+    }
   }
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1rem rgb(255, 255, 255);
@@ -670,9 +684,112 @@ tbody {
     border-radius: 1rem;
   }
 }
-
+.statsTableHeaderBody {
+  & th {
+    table-layout: fixed;
+    @media (max-width: 1520px) {
+      font-size: 1.2rem;
+      width: 15rem;
+    }
+    @media (max-width: 1300px) {
+      min-width: 13rem;
+      text-align: left;
+      padding: 1rem;
+    }
+    @media (max-width: 1080px) {
+      max-width: 13rem;
+      &:nth-child(7) {
+        display: none;
+      }
+    }
+    @media (max-width: 950px) {
+      &:nth-child(6) {
+        display: none;
+      }
+    }
+    @media (max-width: 810px) {
+      &:nth-child(1) {
+        display: none;
+      }
+      &:nth-child(2){
+        border-radius: 1rem 0 0 0;
+      }
+    }
+    @media (max-width: 665px) {
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+    @media (max-width: 550px) {
+      font-size: 1rem;
+      text-align: center;
+      max-width: 10rem;
+      min-width: 10rem;
+      &:after {
+        display: none;
+      }
+      &:hover {
+        letter-spacing: .05rem;
+      }
+      &:nth-child(5) {
+        max-width: 7rem;
+        min-width: 7rem;
+      }
+    }
+    @media (max-width: 394px) {
+      &:nth-child(5) {
+        display: none;
+      }
+    }
+  }
+}
 .statsTableBody {
-  
+  table-layout: fixed;
+  & td {
+    table-layout: fixed;
+
+    @media (max-width: 1520px) {
+      width: 15rem;
+    }
+    @media (max-width: 1300px) {
+      min-width: 13rem;
+    }
+    @media (max-width: 1080px) {
+      max-width: 13rem;
+      &:nth-child(7) {
+        display: none;
+      }
+    }
+    @media (max-width: 950px) {
+      &:nth-child(6) {
+        display: none;
+      }
+    }
+    @media (max-width: 810px) {
+      &:nth-child(1) {
+        display: none;
+      }
+    }
+    @media (max-width: 665px) {
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+    @media (max-width: 550px) {
+      font-size: 1.2rem;
+      max-width: 10rem;
+      min-width: 10rem;
+      &:nth-child(5) {
+        max-width: 7rem;
+        min-width: 7rem;
+      }
+    }
+    @media (max-width: 394px) {
+      &:nth-child(5) {
+        display: none;
+      }
+    }
+  }
 }
 
 tr {
@@ -741,14 +858,18 @@ td {
 
 .resetData,
 .repeatDifficultWords {
-  padding: 0 2.5rem;
+  padding: 0 3rem;
   border-radius: 2rem;
-  height: 6rem;
-  font-size: 1.8rem;
+  height: 4.5rem;
+  font-size: 1.6rem;
   bottom: 0rem;
   right: 0rem;
   cursor: pointer;
   margin: 0 1.5rem;
+  @media (max-width: 665px) {
+    padding: 0 2.5rem;
+    font-size: 1.4rem;
+  }
 }
 
 .resetData {
@@ -811,4 +932,8 @@ td {
       background: #a775e9;
     }
   }
+}
+
+.overflow_hidden {
+  overflow: hidden;
 }

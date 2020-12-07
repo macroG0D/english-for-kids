@@ -9,6 +9,7 @@ import updateScore from './models/Scores';
 
 const menu = new Menu('trainmode');
 let goHome = '';
+const body = document.querySelector('body');
 // burger and side menu
 const burger = document.querySelector('.burger_menu');
 const main = document.querySelector('main');
@@ -34,11 +35,14 @@ const menuController = function (e) {
   if (e.target.classList.contains('burger_menu') || e.target.classList.contains('burger')) {
     if (!menu.opened) {
       menu.showMenu(bluredBackgound);
+      body.classList.add('overflow_hidden');
     } else {
       menu.hideMenu(bluredBackgound);
+      body.classList.remove('overflow_hidden');
     }
   } else {
     menu.hideMenu(bluredBackgound);
+    body.classList.remove('overflow_hidden');
   }
 };
 
@@ -50,6 +54,7 @@ outsideMenu.forEach((elem) => {
 header.addEventListener('click', (e) => {
   if (menu.opened && !e.composedPath()[2].classList.contains('header') && !e.composedPath()[2].classList.contains('left_wrapper')) {
     menu.hideMenu(bluredBackgound);
+    body.classList.remove('overflow_hidden');
   }
 });
 
@@ -186,6 +191,7 @@ function loadCategoryPage(selected, trainDifficultWords) {
   }
 
   menu.hideMenu(bluredBackgound);
+  body.classList.remove('overflow_hidden');
   const flipButtons = document.querySelectorAll('.flipButton');
   if (flipButtons) {
     flipButtons.forEach((flipButton) => {
@@ -215,6 +221,7 @@ goHome = function () {
   home.createHomeCards();
   categoryCards = document.querySelectorAll('.categoryCard');
   menu.hideMenu(bluredBackgound);
+  body.classList.remove('overflow_hidden');
   setActiveMenuItem(mainLink);
 
   categoryCards.forEach((categoryCard) => {

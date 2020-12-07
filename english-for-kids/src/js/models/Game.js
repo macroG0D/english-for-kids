@@ -39,6 +39,8 @@ export default class Game {
         setTimeout(() => { this.sayNewWord(this.wordsCounter); }, 1000);
       } else {
         this.endGame();
+        const body = document.querySelector('body');
+        body.classList.add('overflow_hidden');
       }
     } else {
       this.addStar(false);
@@ -142,7 +144,6 @@ export default class Game {
 
     function deleyedReload() {
       TIMEOUTID = window.setTimeout(reloadApp, 4000);
-      console.log(TIMEOUTID);
     }
     deleyedReload();
     const playModeBtn = document.querySelector('.playmode');
@@ -150,6 +151,5 @@ export default class Game {
     playMoreButton.onclick = window.clearTimeout.bind(null, TIMEOUTID);
     playModeBtn.onclick = window.clearTimeout.bind(null, TIMEOUTID);
     burgerMenu.onclick = window.clearTimeout.bind(null, TIMEOUTID);
-    console.log(TIMEOUTID);
   }
 }
