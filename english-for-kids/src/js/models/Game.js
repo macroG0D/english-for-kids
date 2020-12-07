@@ -14,6 +14,8 @@ export default class Game {
     this.wordsCounter = 0;
     this.win = true;
     this.incorrectsCount = 0;
+    this.totalStarsCount = 0;
+    this.removedStarsCount = 0;
   }
 
   startGame() {
@@ -66,6 +68,16 @@ export default class Game {
       wrondSound.play();
       newStar.src = WRONG_STAR_URL;
     }
+
+    this.totalStarsCount += 1;
+    const cardsWrapper = document.querySelector('.cards-wrapper');
+    const windowWidth = cardsWrapper.scrollWidth;
+    const STARWIDTH = 30;
+    console.log(this.removedStarsCount);
+    if ((STARWIDTH * this.totalStarsCount) > (windowWidth - STARWIDTH)) {
+      starsWrapper.children[this.removedStarsCount].classList.add('hidden');
+      this.removedStarsCount += 1;
+    }
     starsWrapper.append(newStar);
   }
 
@@ -96,6 +108,9 @@ export default class Game {
     const starsWrapper = document.querySelector('.starsWrapper');
     const stars = document.querySelectorAll('.star');
     stars.forEach((star) => {
+      if (star.classList.contains('hidden')) {
+        star.classList.remove('hidden');
+      }
       starsWrapper.appendChild(star);
     });
     const playMoreText = 'Play more';

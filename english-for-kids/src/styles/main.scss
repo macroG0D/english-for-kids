@@ -590,6 +590,12 @@ h2 {
         width: 1.5rem;
       }
     }
+    @media (max-height: 901px) {
+      .star {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
   }
   & button {
     padding: 2rem 6.6rem;
@@ -711,7 +717,7 @@ tbody {
       &:nth-child(1) {
         display: none;
       }
-      &:nth-child(2){
+      &:nth-child(2) {
         border-radius: 1rem 0 0 0;
       }
     }
@@ -729,7 +735,7 @@ tbody {
         display: none;
       }
       &:hover {
-        letter-spacing: .05rem;
+        letter-spacing: 0.05rem;
       }
       &:nth-child(5) {
         max-width: 7rem;
