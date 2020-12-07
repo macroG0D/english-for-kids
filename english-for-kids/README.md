@@ -13,3 +13,4 @@ English for kids webapp within RSS front-end course
 <br>
 
 started 27/11/2020
+finished 07/12/2020
