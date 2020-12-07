@@ -73,7 +73,6 @@ export default class Game {
     const cardsWrapper = document.querySelector('.cards-wrapper');
     const windowWidth = cardsWrapper.scrollWidth;
     const STARWIDTH = 30;
-    console.log(this.removedStarsCount);
     if ((STARWIDTH * this.totalStarsCount) > (windowWidth - STARWIDTH)) {
       starsWrapper.children[this.removedStarsCount].classList.add('hidden');
       this.removedStarsCount += 1;
