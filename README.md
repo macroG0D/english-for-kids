@@ -3,6 +3,7 @@
 v1.0 
 
 English for kids webapp within RSS front-end course
+## deploy: https://macrog0d.github.io/production/english-for-kids/
 
 <br>
 
